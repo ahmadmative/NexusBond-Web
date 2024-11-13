@@ -1,0 +1,117 @@
+.registerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #F5F6FA;
+}
+
+.registerForm {
+  width: 100%;
+  max-width: 440px;
+  padding: 2.5rem;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.registerForm h1 {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--textGrey);
+  margin-bottom: 2rem;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 0 1rem;
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 100px);
+  height: 1px;
+  background-color: var(--borderLight);
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.divider span {
+  background-color: white;
+  padding: 0 1rem;
+  color: var(--textGrey);
+  font-size: 14px;
+}
+
+.socialLogin {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.socialButton {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--borderLight);
+  border-radius: 12px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.socialButton:hover {
+  border-color: var(--primary);
+}
+
+.login {
+  text-align: center;
+  color: var(--textGrey);
+  font-size: 14px;
+}
+
+.login a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+@media (max-width: 480px) {
+  .registerForm {
+    padding: 1.5rem;
+  }
+  
+  .socialButton {
+    width: 48px;
+    height: 48px;
+  }
+} 

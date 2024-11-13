@@ -1,0 +1,108 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #F5F6FA;
+  }
+  
+  .formCard {
+    width: 100%;
+    max-width: 800px;
+    padding: 2.5rem;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .headerText {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+  }
+  
+  .backButton {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+  }
+  
+  .backButton:hover {
+    opacity: 0.7;
+  }
+  
+  .header h2 {
+    flex: 1;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+  }
+  
+  .formGrid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .fullWidth {
+    grid-column: 1 / -1;
+    margin-top: 0.5rem;
+  }
+
+  .characterContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .characterImage {
+    width: 250px;
+    height: 250px;
+    background-color: #ccc;
+    background-position: center;
+    border-radius: 100%;
+  }
+
+  .characterName {
+    font-size: 33px;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .characterDescription {
+    font-size: 13px;
+    color: var(--text-color);
+    text-align: center;
+    max-width: 320px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 640px) {
+    .header h2 {
+      font-size: 24px;
+    }
+  }
+  
