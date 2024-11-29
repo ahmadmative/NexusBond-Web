@@ -36,7 +36,7 @@ export default function ChatSection({ selectedBot, messages, onSendMessage }) {
             <div className={styles.chatHeader}>
                 <div className={styles.avatarContainer}>
                     <Image
-                        src={selectedBot.avatar}
+                        src={selectedBot.profilePicture}
                         alt={selectedBot.name}
                         width={48}
                         height={48}
@@ -47,7 +47,7 @@ export default function ChatSection({ selectedBot, messages, onSendMessage }) {
                 <div className={styles.botInfo}>
                     <h2>{selectedBot.name}</h2>
                     <span className={styles.onlineStatus}>
-                        {selectedBot.online ? 'Online' : 'Offline'}
+                        Online
                     </span>
                 </div>
             </div>
@@ -63,7 +63,7 @@ export default function ChatSection({ selectedBot, messages, onSendMessage }) {
                             <div className={styles.messageActions}>
                                 <button>
                                     <Image
-                                        src="/assets/icons/copy.svg"
+                                        src="/assets/icons/copy.png"
                                         alt="Copy"
                                         width={16}
                                         height={16}
@@ -71,7 +71,7 @@ export default function ChatSection({ selectedBot, messages, onSendMessage }) {
                                 </button>
                                 <button>
                                     <Image
-                                        src="/assets/icons/share.svg"
+                                        src="/assets/icons/share.png"
                                         alt="Share"
                                         width={16}
                                         height={16}

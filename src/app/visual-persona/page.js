@@ -1,21 +1,47 @@
 "use client";
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Dropdown from '@/components/Dropdown';
 import Button from '@/components/Button';
 import styles from './visualPersona.module.css';
+import {
+    hairColorOptions,
+    hairstyleOptions,
+    eyeColorOptions,
+    eyeShapeOptions,
+    skinToneOptions,
+    bodyTypeOptions,
+    heightOptions,
+    fashionStyleOptions,
+    facialExpressionOptions,
+    backgroundOptions
+} from '@/constants/dropdownOptions';
 
 export default function VisualPersona() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    // Get identity data from URL params
+    const identityData = {
+        name: searchParams.get('name') || '',
+        age: searchParams.get('age') || '',
+        ethnicity: searchParams.get('ethnicity') || '',
+        gender: searchParams.get('gender') || '',
+        nationality: searchParams.get('nationality') || '',
+        pronouns: searchParams.get('pronouns') || '',
+    };
+
     const [formData, setFormData] = useState({
-        face: '',
-        hair: '',
-        beard: '',
-        nose: '',
-        eyebrow: '',
-        eyes: '',
-        glasses: ''
+        hairColor: '',
+        hairstyle: '',
+        eyeColor: '',
+        eyeShape: '',
+        skinTone: '',
+        bodyType: '',
+        height: '',
+        fashionStyle: '',
+        facialExpression: '',
+        background: ''
     });
 
     const handleChange = (e) => {
@@ -27,101 +53,126 @@ export default function VisualPersona() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        router.push('/character-vibe');
-    };
+        
+        // Combine both identity and visual data
+        const combinedData = {
+            ...identityData,
+            ...formData
+        };
 
-    // Sample options for dropdowns
-    const options = {
-        face: ['Round', 'Oval', 'Square', 'Heart', 'Diamond'],
-        hair: ['Straight', 'Wavy', 'Curly', 'Bald', 'Short', 'Long'],
-        beard: ['Clean Shaven', 'Stubble', 'Full Beard', 'Goatee', 'None'],
-        nose: ['Straight', 'Roman', 'Button', 'Wide', 'Narrow'],
-        eyebrow: ['Straight', 'Curved', 'Arched', 'Thick', 'Thin'],
-        eyes: ['Round', 'Almond', 'Hooded', 'Wide-set', 'Close-set'],
-        glasses: ['None', 'Rectangle', 'Round', 'Oval', 'Square', 'Rimless']
+        console.log('Combined Data:', combinedData);
+
+        // Convert combined data to URL params
+        const newSearchParams = new URLSearchParams();
+        Object.entries(combinedData).forEach(([key, value]) => {
+            if (value) {
+                newSearchParams.append(key, value);
+            }
+        });
+
+        // Navigate to next page with all data
+        router.push(`/character-vibe?${newSearchParams.toString()}`);
     };
 
     return (
         <div className={styles.container}>
             <div className={styles.formCard}>
-                <div className={styles.header}>
-                    <button
-                        onClick={() => router.back()}
-                        className={styles.backButton}
-                    >
-                        <Image
-                            src="/assets/icons/arrowBack.png"
-                            alt="Back"
-                            width={24}
-                            height={24}
-                        />
-                    </button>
-                    <h2>Visual Persona</h2>
-                </div>
+                <h1>Visual Persona</h1>
 
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGrid}>
                         <Dropdown
-                            placeholder="Face"
-                            name="face"
-                            value={formData.face}
-                            onChange={handleChange}
-                            icon="/assets/characterIcons/face.png"
-                            options={options.face}
-                        />
-                        <Dropdown
-                            placeholder="Hair"
-                            name="hair"
-                            value={formData.hair}
+                            placeholder="Hair Color"
+                            name="hairColor"
+                            value={formData.hairColor}
                             onChange={handleChange}
                             icon="/assets/characterIcons/hair.png"
-                            options={options.hair}
+                            options={hairColorOptions}
                         />
+
                         <Dropdown
-                            placeholder="Beard"
-                            name="beard"
-                            value={formData.beard}
+                            placeholder="Hairstyle"
+                            name="hairstyle"
+                            value={formData.hairstyle}
                             onChange={handleChange}
-                            icon="/assets/characterIcons/beard.png"
-                            options={options.beard}
+                            icon="/assets/characterIcons/hair.png"
+                            options={hairstyleOptions}
                         />
+
                         <Dropdown
-                            placeholder="Nose"
-                            name="nose"
-                            value={formData.nose}
-                            onChange={handleChange}
-                            icon="/assets/characterIcons/nose.png"
-                            options={options.nose}
-                        />
-                        <Dropdown
-                            placeholder="Eyebrow"
-                            name="eyebrow"
-                            value={formData.eyebrow}
-                            onChange={handleChange}
-                            icon="/assets/characterIcons/eyebrow.png"
-                            options={options.eyebrow}
-                        />
-                        <Dropdown
-                            placeholder="Eyes"
-                            name="eyes"
-                            value={formData.eyes}
+                            placeholder="Eye Color"
+                            name="eyeColor"
+                            value={formData.eyeColor}
                             onChange={handleChange}
                             icon="/assets/characterIcons/eyes.png"
-                            options={options.eyes}
+                            options={eyeColorOptions}
                         />
-                        <div className={styles.fullWidthDropdown}>
-                            <Dropdown
-                                placeholder="Glasses"
-                                name="glasses"
-                                value={formData.glasses}
-                                onChange={handleChange}
-                                icon="/assets/characterIcons/glasses.png"
-                                options={options.glasses}
-                            />
-                        </div>
+
+                        <Dropdown
+                            placeholder="Eye Shape"
+                            name="eyeShape"
+                            value={formData.eyeShape}
+                            onChange={handleChange}
+                            icon="/assets/characterIcons/eyes.png"
+                            options={eyeShapeOptions}
+                        />
+
+                        <Dropdown
+                            placeholder="Skin Tone"
+                            name="skinTone"
+                            value={formData.skinTone}
+                            onChange={handleChange}
+                            icon="/assets/characterIcons/face.png"
+                            options={skinToneOptions}
+                        />
+
+                        <Dropdown
+                            placeholder="Body Type"
+                            name="bodyType"
+                            value={formData.bodyType}
+                            onChange={handleChange}
+                            icon="/assets/characterIcons/face.png"
+                            options={bodyTypeOptions}
+                        />
+
+                        <Dropdown
+                            placeholder="Height"
+                            name="height"
+                            value={formData.height}
+                            onChange={handleChange}
+                            icon="/assets/characterIcons/face.png"
+                            options={heightOptions}
+                        />
+
+                        <Dropdown
+                            placeholder="Fashion Style"
+                            name="fashionStyle"
+                            value={formData.fashionStyle}
+                            onChange={handleChange}
+                            icon="/assets/characterIcons/hobbies.png"
+                            options={fashionStyleOptions}
+                        />
+
+                        <Dropdown
+                            placeholder="Facial Expression"
+                            name="facialExpression"
+                            value={formData.facialExpression}
+                            onChange={handleChange}
+                            icon="/assets/characterIcons/face.png"
+                            options={facialExpressionOptions}
+                        />
+
+                        <Dropdown
+                            placeholder="Background"
+                            name="background"
+                            value={formData.background}
+                            onChange={handleChange}
+                            icon="/assets/characterIcons/nationality.png"
+                            options={backgroundOptions}
+                        />
                     </div>
 
-                    <div style={{ display: 'flex', justifyContent: 'center', }}>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <Button
                             type="submit"
                             width={300}

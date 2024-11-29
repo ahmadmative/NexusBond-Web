@@ -7,6 +7,7 @@ import Button from '@/components/Button';
 import styles from './login.module.css';
 import { useRouter } from 'next/navigation';
 import { authService } from '@/api/services/auth.service';
+import LoaderPopup from '@/components/LoaderPopup';
 
 export default function Login() {
   const router = useRouter();
@@ -81,7 +82,7 @@ export default function Login() {
 
           <Button type="submit">Login</Button>
 
-          <div className={styles.divider}>
+          {/* <div className={styles.divider}>
             <span>Or Login with</span>
           </div>
 
@@ -95,13 +96,16 @@ export default function Login() {
             <button className={styles.socialButton}>
               <Image src="/assets/icons/apple.png" alt="Apple" width={24} height={24} />
             </button>
-          </div>
+          </div> */}
+
+          <div style={{height: "40px"}}/>
 
           <div className={styles.register}>
             <span>Don't have an account? </span>
             <Link href="/register">Register Now</Link>
           </div>
-        </form>
+          {loading && <LoaderPopup />}
+        </form>  
       </div>
     </div>
   );

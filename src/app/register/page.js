@@ -6,9 +6,12 @@ import Input from '@/components/Input';
 import Button from '@/components/Button';
 import styles from './register.module.css';
 import { useRouter } from 'next/navigation';
+import { authService } from '@/api/services/auth.service';
+import LoaderPopup from '@/components/LoaderPopup';
 
 export default function Register() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -22,9 +25,15 @@ export default function Register() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    router.push('/identity-essence');
+    console.log(formData);
+    setLoading(true);
+    const response = await authService.register(formData.email, formData.password, formData.fullName);
+    if(response.user) {
+      router.push('/subscription?email=' + formData.email + '&name=' + formData.fullName);
+    }
+    setLoading(false);
   };
 
   return (
@@ -76,7 +85,7 @@ export default function Register() {
           onClick={handleSubmit}
           >Register</Button>
 
-          <div className={styles.divider}>
+          {/* <div className={styles.divider}>
             <span>Or Login with</span>
           </div>
 
@@ -90,12 +99,15 @@ export default function Register() {
             <button className={styles.socialButton}>
               <Image src="/assets/icons/apple.png" alt="Apple" width={24} height={24} />
             </button>
-          </div>
+          </div> */}
+          <div style={{height: "40px"}}/>
 
           <div className={styles.login}>
             <span>Already Have An Account? </span>
             <Link href="/login">Log in</Link>
           </div>
+
+          {loading && <LoaderPopup />}
         </form>
       </div>
     </div>

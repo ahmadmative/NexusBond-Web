@@ -6,17 +6,23 @@ import Dropdown from '@/components/Dropdown';
 import Button from '@/components/Button';
 import styles from './identityEssence.module.css';
 import { useRouter } from 'next/navigation';
+import { 
+    ageOptions, 
+    ethnicityOptions, 
+    genderOptions, 
+    nationalityOptions, 
+    pronounOptions 
+} from '@/constants/dropdownOptions';
 
 export default function IdentityEssence() {
     const router = useRouter();
     const [formData, setFormData] = useState({
         name: '',
-        gender: '',
         age: '',
-        dateOfBirth: '',
+        ethnicity: '',
+        gender: '',
         nationality: '',
         pronouns: '',
-        religion: ''
     });
 
     const handleChange = (e) => {
@@ -28,11 +34,19 @@ export default function IdentityEssence() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        router.push('/visual-persona');
-    };
+        console.log(formData); // For debugging
+        
+        // Convert formData to URL search params
+        const searchParams = new URLSearchParams();
+        Object.entries(formData).forEach(([key, value]) => {
+            if (value) { // Only add non-empty values
+                searchParams.append(key, value);
+            }
+        });
 
-    const genderOptions = ['Male', 'Female', 'Non-binary', 'Other'];
-    const religionOptions = ['Christianity', 'Islam', 'Hinduism', 'Buddhism', 'Other'];
+        // Navigate to next page with search params
+        router.push(`/visual-persona?${searchParams.toString()}`);
+    };
 
     return (
         <div className={styles.container}>
@@ -51,6 +65,24 @@ export default function IdentityEssence() {
                         />
 
                         <Dropdown
+                            placeholder="Age Range"
+                            name="age"
+                            value={formData.age}
+                            onChange={handleChange}
+                            icon="/assets/characterIcons/age.png"
+                            options={ageOptions}
+                        />
+
+                        <Dropdown
+                            placeholder="Ethnicity"
+                            name="ethnicity"
+                            value={formData.ethnicity}
+                            onChange={handleChange}
+                            icon="/assets/characterIcons/name.png"
+                            options={ethnicityOptions}
+                        />
+
+                        <Dropdown
                             placeholder="Gender"
                             name="gender"
                             value={formData.gender}
@@ -59,57 +91,27 @@ export default function IdentityEssence() {
                             options={genderOptions}
                         />
 
-                        <Input
-                            type="number"
-                            placeholder="Age"
-                            name="age"
-                            value={formData.age}
-                            onChange={handleChange}
-                            icon="/assets/characterIcons/age.png"
-                        />
-
-                        <Input
-                            type="date"
-                            placeholder="Date of Birth"
-                            name="dateOfBirth"
-                            value={formData.dateOfBirth}
-                            onChange={handleChange}
-                            icon="/assets/characterIcons/dob.png"
-                        />
-
-                        <Input
-                            type="text"
+                        <Dropdown
                             placeholder="Nationality"
                             name="nationality"
                             value={formData.nationality}
                             onChange={handleChange}
                             icon="/assets/characterIcons/nationality.png"
+                            options={nationalityOptions}
                         />
 
-                        <Input
-                            type="text"
+                        <Dropdown
                             placeholder="Pronouns"
                             name="pronouns"
                             value={formData.pronouns}
                             onChange={handleChange}
                             icon="/assets/characterIcons/pronouns.png"
+                            options={pronounOptions}
                         />
-
-                        <div className={styles.fullWidthDropdown}>
-                            <Dropdown
-                                placeholder="Religion"
-                                name="religion"
-                                value={formData.religion}
-                                onChange={handleChange}
-                                icon="/assets/characterIcons/religion.png"
-                                options={religionOptions}
-                            />
-                        </div>
                     </div>
 
                     <div style={{ display: 'flex', justifyContent: 'center', }}>
                         <Button
-                            // onClick={handleSubmit}
                             type="submit"
                             width={300}
                         >

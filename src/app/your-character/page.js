@@ -1,60 +1,60 @@
 "use client";
-import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import Button from '@/components/Button';
 import styles from './yourCharacter.module.css';
+import { useRouter } from 'next/navigation';
 
 export default function YourCharacter() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const [character, setCharacter] = useState(null);
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+    useEffect(() => {
+        try {
+            // Get character data from URL params and parse it
+            const characterParam = searchParams.get('character');
+            if (characterParam) {
+                const decodedCharacter = JSON.parse(decodeURIComponent(characterParam));
+                setCharacter(decodedCharacter);
+            }
+        } catch (error) {
+            console.error('Error parsing character data:', error);
+        }
+    }, [searchParams]);
+
+    const handleStartChat = () => {
+        // Navigate to chat page with character data
+        router.push(`/home`);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        router.push('/home');
-    };
+    if (!character) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className={styles.container}>
-            <div className={styles.formCard}>
-                <div className={styles.header}>
-                    <button
-                        onClick={() => router.back()}
-                        className={styles.backButton}
-                    >
+            <div className={styles.characterCard}>
+                <h1>Your Character is Ready!</h1>
+                
+                <div className={styles.profileSection}>
+                    <div className={styles.imageWrapper}>
                         <Image
-                            src="/assets/icons/arrowBack.png"
-                            alt="Back"
-                            width={24}
-                            height={24}
-                        />
-                    </button>
-                    <h2 className={styles.headerText}>Here is your character</h2>
-                </div>
-
-
-                <div className={styles.characterContainer}>
-                    <div className={styles.characterImage}>
-                        <Image
-                            src="/assets/images/avatar3.png"
-                            alt="Avatar"
-                            width={250}
-                            height={250}
+                            src={character.profile_picture}
+                            alt={character.name}
+                            width={350}
+                            height={350}
+                            className={styles.profileImage}
                         />
                     </div>
-                    <h1 className={styles.characterName}>Clark Smith</h1>
-                    <p className={styles.characterDescription}>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+                    
+                    <h2 className={styles.characterName}>{character.name}</h2>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px'}}>
+                <div className={styles.actionButtons}>
                     <Button
-                        onClick={handleSubmit}
-                        type="submit"
+                        onClick={handleStartChat}
                         width={300}
                     >
                         Start Chat

@@ -2,8 +2,8 @@ import axios from 'axios';
 
 // Create instance for backend API (login/auth)
 const axiosAuthInstance = axios.create({
-    baseURL: 'https://nexusbond.webjerky.com',
-    timeout: 10000,
+    baseURL: 'https://application.nexusbond.ai',
+    // timeout: 10000,
     headers: {
         'Content-Type': 'multipart/form-data'
         // 'Content-Type': 'application/json'

@@ -5,6 +5,7 @@
   flex-direction: column;
   background: #F5F6FA;
   padding-top: 20px;
+  border-bottom: 1px solid #F0F0F0;
 }
 
 .chatHeader {
@@ -50,7 +51,7 @@
 }
 
 .message {
-  max-width: 70%;
+  max-width: 40%;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -72,6 +73,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
+  /* max-width: 60%; */
   position: relative;
 }
 
@@ -83,7 +85,7 @@
 }
 
 .botMessage .messageContent {
-  background: #F5F6FA;
+  background: var(--primary);
   color: #000000;
   border-bottom-left-radius: 4px;
 }
@@ -168,12 +170,14 @@
 
 .emptyChatSection {
   flex: 1;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #F5F6FA;
   color: #6B7280;
   font-size: 16px;
+  border-bottom: 1px solid #F0F0F0;
 }
 
 .avatarContainer {

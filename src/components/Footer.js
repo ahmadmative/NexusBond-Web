@@ -1,10 +1,46 @@
 "use client";
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/Footer.module.css';
 import logoImage from '../../public/assets/images/logo.png';
+import { authService } from '@/api/services/auth.service';
 
 export default function Footer() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const isAuth = authService.isAuthenticated();
+      setIsAuthenticated(isAuth);
+    };
+
+    // Initial check
+    checkAuth();
+
+    // Listen for auth changes
+    window.addEventListener('authStateChanged', checkAuth);
+    
+    // Listen for storage changes (for multi-tab support)
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'token' || e.key === 'user') {
+        checkAuth();
+      }
+    });
+
+    return () => {
+      window.removeEventListener('authStateChanged', checkAuth);
+      window.removeEventListener('storage', checkAuth);
+    };
+  }, [pathname]);
+
+  // Don't render the footer if user is authenticated
+  if (isAuthenticated) {
+    return null;
+  }
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>

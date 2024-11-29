@@ -1,21 +1,66 @@
 "use client";
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
+import axios from 'axios';
 import Dropdown from '@/components/Dropdown';
 import Button from '@/components/Button';
 import styles from './characterVibe.module.css';
+import {
+    hobbiesOptions,
+    communicationStyleOptions,
+    goalsOptions,
+    personalValuesOptions,
+    senseOfHumorOptions,
+    socialBehaviorOptions,
+    emotionalIntelligenceOptions,
+    reactionToConflictOptions,
+    prefferedTopicOptions
+} from '@/constants/dropdownOptions';
+import {authService} from '@/api/services/auth.service';
+import LoaderPopup from '@/components/LoaderPopup';
+
+// Calculate DOB helper function
+const calculateDateOfBirth = (age) => {
+    const today = new Date();
+    const birthYear = today.getFullYear() - parseInt(age.split('-')[0]);
+    return `${birthYear}-01-01`; // Returns approximate DOB using January 1st
+};
 
 export default function CharacterVibe() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const [loading, setLoading] = useState(false);
+
+    // Get all previous data from URL params
+    const previousData = {
+        name: searchParams.get('name') || '',
+        age: searchParams.get('age') || '',
+        ethnicity: searchParams.get('ethnicity') || '',
+        gender: searchParams.get('gender') || '',
+        nationality: searchParams.get('nationality') || '',
+        pronouns: searchParams.get('pronouns') || '',
+        hairColor: searchParams.get('hairColor') || '',
+        hairstyle: searchParams.get('hairstyle') || '',
+        eyeColor: searchParams.get('eyeColor') || '',
+        eyeShape: searchParams.get('eyeShape') || '',
+        skinTone: searchParams.get('skinTone') || '',
+        bodyType: searchParams.get('bodyType') || '',
+        height: searchParams.get('height') || '',
+        fashionStyle: searchParams.get('fashionStyle') || '',
+        facialExpression: searchParams.get('facialExpression') || '',
+        background: searchParams.get('background') || ''
+    };
+
     const [formData, setFormData] = useState({
         hobbies: '',
-        communication: '',
+        communicationStyle: '',
         goals: '',
-        values: '',
-        humor: '',
-        social: '',
-        emotional: ''
+        personalValues: '',
+        senseOfHumor: '',
+        socialBehavior: '',
+        emotionalIntelligence: '',
+        reactionToConflict: '',
+        prefferedTopic: ''
     });
 
     const handleChange = (e) => {
@@ -25,58 +70,102 @@ export default function CharacterVibe() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        router.push('/your-character');
-    };
+        setLoading(true);
 
-    // Sample options for dropdowns
-    const options = {
-        hobbies: ['Sports & Fitness', 'Arts & Creativity', 'Technology', 'Reading', 'Travel', 'Music', 'Gaming', 'Cooking'],
-        communication: ['Direct & Clear', 'Diplomatic & Tactful', 'Casual & Friendly', 'Formal & Professional', 'Expressive & Animated'],
-        goals: ['Career Success', 'Personal Growth', 'Financial Security', 'Work-Life Balance', 'Social Impact', 'Learning & Development'],
-        values: ['Integrity', 'Innovation', 'Compassion', 'Achievement', 'Independence', 'Collaboration', 'Adventure'],
-        humor: ['Witty & Clever', 'Sarcastic', 'Playful & Silly', 'Dry & Subtle', 'Self-deprecating', 'Observational'],
-        social: ['Outgoing & Social', 'Reserved & Selective', 'Adaptable', 'Independent', 'Team-oriented', 'Leadership-focused'],
-        emotional: ['Highly Aware', 'Balanced & Stable', 'Empathetic', 'Logical & Rational', 'Growth-oriented', 'Resilient']
+        try {
+            // Combine all data
+            const allData = {
+                ...previousData,
+                ...formData
+            };
+
+            // Prepare data for API
+            const apiData = {
+                features: {
+                    Name: allData.name,
+                    Gender: allData.gender,
+                    Ethnicity: allData.ethnicity,
+                    Age: allData.age,
+                    DateOfBirth: calculateDateOfBirth(allData.age),
+                    Nationality: allData.nationality,
+                    Pronouns: allData.pronouns,
+                    HairStyle: allData.hairstyle,
+                    HairColor: allData.hairColor,
+                    SkinTone: allData.skinTone,
+                    EyeShape: allData.eyeShape,
+                    EyeColor: allData.eyeColor,
+                    BodyType: allData.bodyType,
+                    Height: allData.height,
+                    TattoosPiercings: "none",
+                    FashionStyle: allData.fashionStyle,
+                    FacialExpression: allData.facialExpression,
+                    BackgroundDescription: allData.background,
+                    HobbiesInterests: allData.hobbies,
+                    PreferredTopics: allData.prefferedTopic,
+                    CommunicationStyle: allData.communicationStyle,
+                    GoalsAspirations: allData.goals,
+                    PersonalValues: allData.personalValues,
+                    SenseOfHumor: allData.senseOfHumor,
+                    EmotionalIntelligence: allData.emotionalIntelligence,
+                    SocialBehavior: allData.socialBehavior,
+                    ReactionToConflict: allData.reactionToConflict,
+                    Provocativeness: "Decent",
+                    session_id: 'xyz-001'
+                }
+            };
+
+            // Get token from localStorage or wherever you store it
+            const token = authService.getAccessToken();
+
+            const response = await axios({
+                method: 'post',
+                url: 'https://application.nexusbond.ai/api/character/store',
+                data: apiData,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            if (response.status === 201) {
+                // Store user data if needed
+                localStorage.setItem('character', JSON.stringify(response.data));
+                
+                // Navigate to chat page with data
+                router.push(`/your-character?character=${encodeURIComponent(JSON.stringify(response.data))}`);
+            }
+        } catch (error) {
+            console.error('API Error:', error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <div className={styles.container}>
             <div className={styles.formCard}>
-                <div className={styles.header}>
-                    <button
-                        onClick={() => router.back()}
-                        className={styles.backButton}
-                    >
-                        <Image
-                            src="/assets/icons/arrowBack.png"
-                            alt="Back"
-                            width={24}
-                            height={24}
-                        />
-                    </button>
-                    <h2>Character Vibe</h2>
-                </div>
+                <h1>Character Vibe</h1>
 
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGrid}>
                         <Dropdown
-                            placeholder="Hobbies and Interests"
+                            placeholder="Hobbies"
                             name="hobbies"
                             value={formData.hobbies}
                             onChange={handleChange}
-                            icon="/assets/characterIcons/hobbies.png"
-                            options={options.hobbies}
+                            icon="/assets/characterIcons/communicationStyle.png"
+                            options={hobbiesOptions}
                         />
 
                         <Dropdown
                             placeholder="Communication Style"
-                            name="communication"
-                            value={formData.communication}
+                            name="communicationStyle"
+                            value={formData.communicationStyle}
                             onChange={handleChange}
                             icon="/assets/characterIcons/communicationStyle.png"
-                            options={options.communication}
+                            options={communicationStyleOptions}
                         />
 
                         <Dropdown
@@ -85,57 +174,75 @@ export default function CharacterVibe() {
                             value={formData.goals}
                             onChange={handleChange}
                             icon="/assets/characterIcons/goals.png"
-                            options={options.goals}
+                            options={goalsOptions}
                         />
 
                         <Dropdown
                             placeholder="Personal Values"
-                            name="values"
-                            value={formData.values}
+                            name="personalValues"
+                            value={formData.personalValues}
                             onChange={handleChange}
-                            icon="/assets/characterIcons/values.png"
-                            options={options.values}
+                            icon="/assets/characterIcons/personalValues.png"
+                            options={personalValuesOptions}
                         />
 
                         <Dropdown
                             placeholder="Sense of Humor"
-                            name="humor"
-                            value={formData.humor}
+                            name="senseOfHumor"
+                            value={formData.senseOfHumor}
                             onChange={handleChange}
                             icon="/assets/characterIcons/senseOfHumor.png"
-                            options={options.humor}
+                            options={senseOfHumorOptions}
                         />
 
                         <Dropdown
                             placeholder="Social Behavior"
-                            name="social"
-                            value={formData.social}
+                            name="socialBehavior"
+                            value={formData.socialBehavior}
                             onChange={handleChange}
                             icon="/assets/characterIcons/socialBehavior.png"
-                            options={options.social}
+                            options={socialBehaviorOptions}
                         />
 
-                        <div className={styles.fullWidthDropdown}>
-                            <Dropdown
-                                placeholder="Emotional Intelligence"
-                                name="emotional"
-                                value={formData.emotional}
-                                onChange={handleChange}
-                                icon="/assets/characterIcons/emotionalIntelligence.png"
-                                options={options.emotional}
-                            />
-                        </div>
+                        <Dropdown
+                            placeholder="Emotional Intelligence"
+                            name="emotionalIntelligence"
+                            value={formData.emotionalIntelligence}
+                            onChange={handleChange}
+                            icon="/assets/characterIcons/emotionalIntelligence.png"
+                            options={emotionalIntelligenceOptions}
+                        />
+
+                        <Dropdown
+                            placeholder="Reaction to Conflict"
+                            name="reactionToConflict"
+                            value={formData.reactionToConflict}
+                            onChange={handleChange}
+                            icon="/assets/characterIcons/communicationStyle.png"
+                            options={reactionToConflictOptions}
+                        />
+
+                        <Dropdown
+                            placeholder="Preferred Topics"
+                            name="prefferedTopic"
+                            value={formData.prefferedTopic}
+                            onChange={handleChange}
+                            icon="/assets/characterIcons/communicationStyle.png"
+                            options={prefferedTopicOptions}
+                        />
                     </div>
 
-
-                    <div style={{ display: 'flex', justifyContent: 'center', }}>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <Button
                             type="submit"
                             width={300}
+                            disabled={loading}
                         >
-                            Next
+                            {loading ? 'Creating Character...' : 'Create Character'}
                         </Button>
                     </div>
+
+                    {loading && <LoaderPopup />}
                 </form>
             </div>
         </div>

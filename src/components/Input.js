@@ -28,7 +28,7 @@ export default function Input({
             src={icon}
             alt="input icon"
             width={20}
-            height={20}
+            height={20} 
           />
         </div>
       )}

@@ -1,0 +1,23 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    /* background-color: #1F252E; */
+    /* background-image: url('/assets/images/popup-bg.png'); */
+    /* padding: 20px 50px 20px 50px; */
+    /* margin-bottom: 15%; */
+    /* border-radius: 40px; */
+    /* width: 80%; */
+    /* max-width: 400px; */
+    /* text-align: center; */
+    position: relative;
+}

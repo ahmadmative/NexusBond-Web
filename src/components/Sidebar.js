@@ -3,65 +3,8 @@ import { useState } from 'react';
 import Image from 'next/image';
 import styles from '../styles/Sidebar.module.css';
 
-export default function Sidebar({ selectedBot, onBotSelect }) {
+export default function Sidebar({ selectedBot, onBotSelect, chats, loading }) {
     const [searchQuery, setSearchQuery] = useState('');
-
-    // Temporary bot data - will come from API later
-    const bots = [
-        {
-            id: 1,
-            name: 'Pretty Sers',
-            avatar: '/assets/images/avatar1.png',
-            lastMessage: 'Hello, Good Morning.',
-            timestamp: '12:45 PM',
-            online: true
-        },
-        {
-            id: 2,
-            name: 'Julia Asses',
-            avatar: '/assets/images/avatar2.png',
-            lastMessage: 'Hello, Good Morning.',
-            timestamp: '12:45 PM',
-            online: false
-        },
-        {
-            id: 3,
-            name: 'Clark Smith',
-            avatar: '/assets/images/avatar3.png',
-            lastMessage: 'Hello, Good Morning.',
-            timestamp: '12:45 PM',
-            online: false
-        },
-        {
-            id: 4,
-            name: 'Alex Smith',
-            avatar: '/assets/images/avatar4.png',
-            lastMessage: 'Hello, Good Morning.',
-            timestamp: '12:45 PM',
-            online: false
-        },
-        {
-            id: 5,
-            name: 'John Doe',
-            avatar: '/assets/images/avatar5.png',
-            lastMessage: 'Hello, Good Morning.',
-            timestamp: '12:45 PM',
-            online: false
-        },
-        {
-            id: 6,
-            name: 'Clark Kent',
-            avatar: '/assets/images/avatar6.png',
-            lastMessage: 'Hello, Good Morning.',
-            timestamp: '12:45 PM',
-            online: false
-        },
-        // Add more bots...
-    ];
-
-    const filteredBots = bots.filter(bot =>
-        bot.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
 
     return (
         <div className={styles.sidebar}>
@@ -101,7 +44,7 @@ export default function Sidebar({ selectedBot, onBotSelect }) {
             </div>
 
             <div className={styles.botList}>
-                {filteredBots.map(bot => (
+                {chats.map(bot => (
                     <div
                         key={bot.id}
                         className={`${styles.botItem} ${selectedBot?.id === bot.id ? styles.selected : ''}`}
@@ -109,18 +52,18 @@ export default function Sidebar({ selectedBot, onBotSelect }) {
                     >
                         <div className={styles.avatarContainer}>
                             <Image
-                                src={bot.avatar}
+                                src={bot.profilePicture}
                                 alt={bot.name}
                                 width={48}
                                 height={48}
                                 className={styles.avatar}
                             />
-                            {bot.online && <div className={styles.onlineIndicator} />}
+                            <div className={styles.onlineIndicator} />
                         </div>
                         <div className={styles.botInfo}>
                             <div className={styles.nameRow}>
                                 <h3>{bot.name}</h3>
-                                <span className={styles.timestamp}>{bot.timestamp}</span>
+                                <span className={styles.timestamp}>{new Date(bot.timestamp).toLocaleTimeString()}</span>
                             </div>
                             <p className={styles.lastMessage}>{bot.lastMessage}</p>
                         </div>

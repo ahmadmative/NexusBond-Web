@@ -1,0 +1,118 @@
+.container {
+  min-width: 600px;
+  margin: 4rem auto;
+  padding: 3rem;
+  background: white;
+  border-radius: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.container h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.container p {
+  text-align: center;
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 3rem;
+}
+
+/* Form Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Label Styles */
+.label {
+  font-size: 1.25rem;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+/* Email Input Styles */
+.emailInput {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+}
+
+.emailInput:focus {
+  outline: none;
+  border-color: #4285F4;
+}
+
+/* Card Information Label */
+.cardLabel {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+/* Stripe Card Element Styles */
+.cardElement {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+}
+
+.StripeElement {
+  padding: 15px;
+}
+
+.StripeElement--focus {
+  border-color: #4285F4;
+}
+
+.StripeElement--invalid {
+  border-color: #dc3545;
+}
+
+/* Loading State */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Error Message */
+.error {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Success Message */
+.success {
+  color: #28a745;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    margin: 2rem 1rem;
+    padding: 2rem;
+  }
+
+  .container h2 {
+    font-size: 2rem;
+  }
+
+  .container p {
+    font-size: 1.25rem;
+  }
+}
