@@ -36,7 +36,6 @@ export default function Footer() {
     };
   }, [pathname]);
 
-  // Don't render the footer if user is authenticated
   if (isAuthenticated) {
     return null;
   }

@@ -101,7 +101,7 @@ export default function Login() {
           <div style={{height: "40px"}}/>
 
           <div className={styles.register}>
-            <span>Don't have an account? </span>
+            <span>Dont have an account? </span>
             <Link href="/register">Register Now</Link>
           </div>
           {loading && <LoaderPopup />}
