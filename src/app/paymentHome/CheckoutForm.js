@@ -27,7 +27,7 @@ const CARD_ELEMENT_OPTIONS = {
   }
 };
 
-const CheckoutForm = ({ email: initialEmail, name, plan, amount }) => {
+const CheckoutForm = ({ email: initialEmail, name,  planId, planName, planPrice }) => {
   const router = useRouter();
   const [email, setEmail] = useState(initialEmail || ""); // Store the email input
   const [clientSecret, setClientSecret] = useState(""); // Store client secret
@@ -47,58 +47,64 @@ const CheckoutForm = ({ email: initialEmail, name, plan, amount }) => {
     const createPaymentIntent = async () => {
       const response = await fetch("/api/stripe/create-payment-intent", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: planPrice * 100, // convert to cents
+        }),
       });
       const data = await response.json();
-      console.log(data.clientSecret)
+      console.log(data.clientSecret);
       setClientSecret(data.clientSecret);
     };
 
     createPaymentIntent();
-  }, []);
+  }, [planPrice]);
 
   const storePayment = async (paymentIntent) => {
-       setSuccess(true);
+    try {
+      const formData1 = new FormData();
+      formData1.append('details', JSON.stringify({ email, name, planId, planName, planPrice, paymentIntent }));
+      formData1.append('plan_id', planId);
+
+      console.log(email, name, planId, planName, planPrice, paymentIntent);
+
+      const token = authService.getAccessToken();
+
+      console.log(token);
+
+      const response = await axios({
+        method: 'post',
+        url: 'https://application.nexusbond.ai/api/save-payment',
+        data: formData1,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      console.log(response);
+
+      if (response.status === 200 || response.status === 201) {
+        console.log('payment successful', response.data);
+        console.log(response.data);
+        authService.setCurrentUser(response.data.user);
+        setSuccess(true);
         alert("Payment Successful!");
         setTimeout(() => {
           router.replace(`/profile`);
         }, 1500);
-    // try {
-    //   const formData1 = new FormData();
-    //   formData1.append('details', JSON.stringify({ email, name, plan, amount, paymentIntent }));
-    //   formData1.append('plan_id', 1);
-
-    //   console.log(email, name, plan, amount, paymentIntent)
-
-    //   const token = authService.getAccessToken();
-
-    //   console.log(token)
-
-    //   const response = await axios({
-    //     method: 'post',
-    //     url: 'https://application.nexusbond.ai/api/save-payment',
-    //     data: formData1,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': `Bearer ${token}`,
-    //     },
-    //   });
-    //   console.log(response)
-
-    //   if (response.status === 200 || response.status === 201) {
-    //     console.log(response.data)
-     
-    //   }
-    //   else {
-    //     console.log(response.data)
-    //   }
-    //   setLoading(false);
-    // } catch (error) {
-    //   console.error(error);
-    //   setLoading(false);
-    // } finally {
-    //   setLoading(false);
-    // }
-  }
+      } else {
+        console.log(response.data);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Handle form submission to confirm payment
   const handleSubmit = async (event) => {
@@ -159,7 +165,7 @@ const CheckoutForm = ({ email: initialEmail, name, plan, amount }) => {
         disabled={loading || !stripe}
         width="100%"
       >
-        {loading ? "Processing..." : `Pay $${amount}`}
+        {loading ? "Processing..." : `Pay $${planPrice}`}
       </Button>
 
       {success && (

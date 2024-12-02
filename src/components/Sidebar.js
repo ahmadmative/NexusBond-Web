@@ -2,9 +2,24 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import styles from '../styles/Sidebar.module.css';
+import { authService } from '@/api/services/auth.service';
+import { useRouter } from 'next/navigation';
 
 export default function Sidebar({ selectedBot, onBotSelect, chats, loading }) {
     const [searchQuery, setSearchQuery] = useState('');
+    const router = useRouter();
+
+    const checkPlan = () => {
+        const user = authService.getCurrentUser();
+        console.log('allowed chats', user?.subscribedTo?.plan?.no_of_chats);
+        console.log('chats length', chats.length);
+        if (user?.subscribedTo?.plan?.no_of_chats === 0 || chats.length >= user?.subscribedTo?.plan?.no_of_chats || user?.subscribedTo === 'No subscription found') {
+            router.push('/subscriptionHome');
+        }
+        else {
+            router.push('/identity-essence');
+        }
+    }
 
     return (
         <div className={styles.sidebar}>
@@ -24,15 +39,17 @@ export default function Sidebar({ selectedBot, onBotSelect, chats, loading }) {
                     />
                 </div>
                 <div className={styles.actions}>
-                    <button className={styles.filterButton}>
+                    {/* <button className={styles.filterButton}>
                         <Image
                             src="/assets/icons/filter.png"
                             alt="Filter"
                             width={20}
                             height={20}
                         />
-                    </button>
-                    <button className={styles.addButton}>
+                    </button> */}
+                    <button 
+                        onClick={checkPlan}
+                        className={styles.addButton}>
                         <Image
                             src="/assets/icons/add.png"
                             alt="Add"

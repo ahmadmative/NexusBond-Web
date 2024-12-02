@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import Button from '@/components/Button';
 import styles from "./payment.module.css";
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import axios from "axios";
+import { authService } from "@/api/services/auth.service";
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -24,11 +26,11 @@ const CARD_ELEMENT_OPTIONS = {
   }
 };
 
-const CheckoutForm = ({email: initialEmail, name, plan, amount}) => {
+const CheckoutForm = ({ email: initialEmail, name, planId, planName, planPrice }) => {
   const router = useRouter();
-  const [email, setEmail] = useState(initialEmail || ""); // Store the email input
-  const [clientSecret, setClientSecret] = useState(""); // Store client secret
-  const [loading, setLoading] = useState(false); // Track loading state
+  const [email, setEmail] = useState(initialEmail || "");
+  const [clientSecret, setClientSecret] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const stripe = useStripe();
@@ -39,24 +41,28 @@ const CheckoutForm = ({email: initialEmail, name, plan, amount}) => {
       setEmail(initialEmail);
     }
   }, [initialEmail]);
-  // Fetch the client secret from your backend when the component mounts
+
   useEffect(() => {
     const createPaymentIntent = async () => {
       const response = await fetch("/api/stripe/create-payment-intent", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: planPrice * 100, // convert to cents
+        }),
       });
       const data = await response.json();
-      console.log(data.clientSecret)
-      setClientSecret(data.clientSecret); 
+      setClientSecret(data.clientSecret);
     };
 
     createPaymentIntent();
-  }, []);
+  }, [planPrice]);
 
-  // Handle form submission to confirm payment
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!stripe || !elements) return; // Ensure Stripe.js is loaded
+    if (!stripe || !elements) return;
 
     setLoading(true);
 
@@ -64,29 +70,26 @@ const CheckoutForm = ({email: initialEmail, name, plan, amount}) => {
       const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
-        billing_details: {
-          email: email,
+          billing_details: {
+            email: email,
+          },
         },
-      },
-    });
+      });
 
-    if (error) {
-      setError(error.message);
-      console.log(error.message);
-      alert(error.message);
-    } else if (paymentIntent.status === "succeeded") {
-      setSuccess(true);
-      alert("Payment Successful!");
-      // Wait a moment to show success message
-      setTimeout(() => {
-        router.push(`/identity-essence?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}&plan=${encodeURIComponent(plan)}`);
-      }, 1500);
-      console.log(paymentIntent.response)
-    }
-  } catch (err) {
-    setError('An unexpected error occurred. Please try again.');
-    console.error('Payment error:', err);
-  } finally {
+      if (error) {
+        setError(error.message);
+        alert(error.message);
+      } else if (paymentIntent.status === "succeeded") {
+        setSuccess(true);
+        alert("Payment Successful!");
+        setTimeout(() => {
+          router.push(`/identity-essence?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}&planId=${encodeURIComponent(planId)}&planName=${encodeURIComponent(planName)}&planPrice=${encodeURIComponent(planPrice)}`);
+        }, 1500);
+      }
+    } catch (err) {
+      setError('An unexpected error occurred. Please try again.');
+      console.error('Payment error:', err);
+    } finally {
       setLoading(false);
     }
   };
@@ -104,7 +107,7 @@ const CheckoutForm = ({email: initialEmail, name, plan, amount}) => {
           required
         />
       </div>
-      
+
       <div>
         <label className={styles.cardLabel}>Card Information</label>
         <div className={styles.cardElement}>
@@ -113,12 +116,12 @@ const CheckoutForm = ({email: initialEmail, name, plan, amount}) => {
         {error && <div className={styles.error}>{error}</div>}
       </div>
 
-      <Button 
+      <Button
         type="submit"
         disabled={loading || !stripe}
         width="100%"
       >
-        {loading ? "Processing..." : `Pay $${amount}`}
+        {loading ? "Processing..." : `Pay $${planPrice}`}
       </Button>
 
       {success && (

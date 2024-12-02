@@ -1,17 +1,39 @@
-import { NextResponse } from "next/server";
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY); // Initialize Stripe with the secret key
+import { NextResponse } from 'next/server';
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(request) {
   try {
+    let amount = 1000; // default amount
+
+    // Get amount from request body if it exists
+    try {
+      const body = await request.json();
+      if (body.amount) {
+        amount = body.amount;
+      }
+    } catch (e) {
+      // If no body is sent, use default amount
+      console.log('No amount specified, using default');
+    }
+
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 2000, // 20.00 USD in cents
-      currency: "usd",
+      amount: amount,
+      currency: 'usd',
+      metadata: {
+        integration_check: 'accept_a_payment',
+      },
     });
 
     return NextResponse.json({
-      clientSecret: paymentIntent.client_secret,
+      clientSecret: paymentIntent.client_secret
     });
-  } catch (error) {
-    return NextResponse.json({ error: error.message });
+  } catch (err) {
+    console.error('Error creating payment intent:', err);
+    return NextResponse.json(
+      { error: 'Error creating payment intent' },
+      { status: 500 }
+    );
   }
 }

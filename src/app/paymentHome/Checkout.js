@@ -1,42 +1,47 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { loadStripe } from "@stripe/stripe-js"; // Import loadStripe
-import { Elements } from "@stripe/react-stripe-js"; // Import Elements for Stripe context
-import CheckoutForm from "./CheckoutForm"; // Payment form component
+import React, { Suspense } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
 import styles from "./payment.module.css";
 import { useSearchParams } from 'next/navigation';
-// Initialize Stripe outside of the component render to avoid recreating the stripe object on each render
+import LoaderPopup from "@/components/LoaderPopup";
+
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-const Checkout = () => {
+// Separate component for content that uses useSearchParams
+function CheckoutContent() {
   const searchParams = useSearchParams();
-  const plan = searchParams.get('plan');
   const email = searchParams.get('email');
   const name = searchParams.get('name');
-  
-  const getPlanAmount = (planType) => {
-    switch(planType) {
-      case 'basic':
-        return 50;
-      case 'silver':
-        return 100;
-      case 'gold':
-        return 150;
-      default:
-        return 50;
-    }
-  };
+  const planId = searchParams.get('planId');
+  const planName = searchParams.get('planName');
+  const planPrice = searchParams.get('planPrice');
 
   return (
     <div className={styles.container}>
       <h2>Subscribe to Our Service</h2>
-      <p>Plan: USD ${getPlanAmount(plan)} / month</p>
+      <p>Plan: USD ${planPrice} / month</p>
 
-      {/* Wrap your form with the Elements provider */}
       <Elements stripe={stripePromise}>
-        <CheckoutForm email={email} name={name} plan={plan} amount={getPlanAmount(plan)}/> {/* Your custom form component for payment */}
+        <CheckoutForm 
+          email={email} 
+          name={name} 
+          planId={planId} 
+          planName={planName} 
+          planPrice={planPrice}
+        />
       </Elements>
     </div>
+  );
+}
+
+// Main component with Suspense wrapper
+const Checkout = () => {
+  return (
+    <Suspense fallback={<LoaderPopup />}>
+      <CheckoutContent />
+    </Suspense>
   );
 };
 

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import Dropdown from '@/components/Dropdown';
@@ -26,9 +26,10 @@ const calculateDateOfBirth = (age) => {
     return `${birthYear}-01-01`; // Returns approximate DOB using January 1st
 };
 
-export default function CharacterVibe() {
-    const router = useRouter();
+// Create a separate component for the form content
+function CharacterVibeContent() {
     const searchParams = useSearchParams();
+    const router = useRouter();
     const [loading, setLoading] = useState(false);
 
     // Get all previous data from URL params
@@ -246,5 +247,14 @@ export default function CharacterVibe() {
                 </form>
             </div>
         </div>
+    );
+}
+
+// Main component with Suspense wrapper
+export default function CharacterVibe() {
+    return (
+        <Suspense fallback={<LoaderPopup />}>
+            <CharacterVibeContent />
+        </Suspense>
     );
 } 

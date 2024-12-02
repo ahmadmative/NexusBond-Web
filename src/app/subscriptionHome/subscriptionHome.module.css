@@ -117,4 +117,21 @@
 
 .buyButton:hover {
   background: #3367D6;
+}
+
+.activePlan {
+  border: 2px solid #4CAF50;
+  position: relative;
+}
+
+.activeLabel {
+  position: absolute;
+  top: -12px;
+  right: 10px;
+  background: #4CAF50;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
 } 
