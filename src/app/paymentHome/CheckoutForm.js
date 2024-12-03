@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import Button from '@/components/Button';
 import styles from "./payment.module.css";
@@ -27,7 +27,7 @@ const CARD_ELEMENT_OPTIONS = {
   }
 };
 
-const CheckoutForm = ({ email: initialEmail, name,  planId, planName, planPrice }) => {
+function CheckoutFormContent({ email: initialEmail, name, planId, planName, planPrice }) {
   const router = useRouter();
   const [email, setEmail] = useState(initialEmail || ""); // Store the email input
   const [clientSecret, setClientSecret] = useState(""); // Store client secret
@@ -175,6 +175,15 @@ const CheckoutForm = ({ email: initialEmail, name,  planId, planName, planPrice 
       )}
       {loading && <LoaderPopup />}
     </form>
+  );
+}
+
+// Main component with Suspense wrapper
+const CheckoutForm = (props) => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CheckoutFormContent {...props} />
+    </Suspense>
   );
 };
 

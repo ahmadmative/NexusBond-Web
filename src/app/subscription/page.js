@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import styles from './subscription.module.css';
@@ -7,7 +7,8 @@ import LoaderPopup from '@/components/LoaderPopup';
 import { authService } from '@/api/services/auth.service';
 import axios from 'axios';
 
-export default function Subscription() {
+// Create a component for the subscription content
+function SubscriptionContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [selectedPlan, setSelectedPlan] = useState(null);
@@ -129,5 +130,14 @@ export default function Subscription() {
 
       {loading && <LoaderPopup />}
     </div>
+  );
+}
+
+// Main component with Suspense wrapper
+export default function Subscription() {
+  return (
+    <Suspense fallback={<LoaderPopup />}>
+      <SubscriptionContent />
+    </Suspense>
   );
 } 

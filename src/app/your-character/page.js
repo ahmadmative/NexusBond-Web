@@ -1,12 +1,13 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import Button from '@/components/Button';
 import styles from './yourCharacter.module.css';
 import { useRouter } from 'next/navigation';
 
-export default function YourCharacter() {
+// Create a component for the character content
+function YourCharacterContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [character, setCharacter] = useState(null);
@@ -62,5 +63,14 @@ export default function YourCharacter() {
                 </div>
             </div>
         </div>
+    );
+}
+
+// Main component with Suspense wrapper
+export default function YourCharacter() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <YourCharacterContent />
+        </Suspense>
     );
 } 

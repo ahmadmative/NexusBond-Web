@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Dropdown from '@/components/Dropdown';
 import Button from '@/components/Button';
@@ -17,7 +17,8 @@ import {
     backgroundOptions
 } from '@/constants/dropdownOptions';
 
-export default function VisualPersona() {
+// Create a component for the form content
+function VisualPersonaContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -183,5 +184,14 @@ export default function VisualPersona() {
                 </form>
             </div>
         </div>
+    );
+}
+
+// Main component with Suspense wrapper
+export default function VisualPersona() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <VisualPersonaContent />
+        </Suspense>
     );
 } 
