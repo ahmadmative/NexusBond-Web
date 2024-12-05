@@ -39,7 +39,12 @@ function CheckoutFormContent({ email: initialEmail, name, planId, planName, plan
 
   useEffect(() => {
     if (initialEmail) {
-      setEmail(initialEmail);
+      console.log('initialEmail', initialEmail);
+      if(initialEmail === null) {
+        setEmail("");
+      } else {
+        setEmail(initialEmail);
+      }
     }
   }, [initialEmail]);
   // Fetch the client secret from your backend when the component mounts

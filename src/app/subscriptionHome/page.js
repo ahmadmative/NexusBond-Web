@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import styles from './subscriptionHome.module.css';
 import LoaderPopup from '@/components/LoaderPopup';
@@ -10,17 +10,20 @@ import axios from 'axios';
 // Create a component for the subscription content
 function SubscriptionHomeContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [loading, setLoading] = useState(false);
   const [plans, setPlans] = useState([]);
-  const email = searchParams.get('email');
-  const name = searchParams.get('name');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [currentUserPlan, setCurrentUserPlan] = useState(null);
 
   useEffect(() => {
     const user = authService.getCurrentUser();
     console.log("user", user);
+    setEmail(user?.email);
+    setName(user?.name);
+    console.log('user?.subscribedTo', user?.subscribedTo);
+    console.log('user?.subscribedTo?.plan?.name', user?.subscribedTo?.plan?.name);
     if(user?.subscribedTo === 'No subscription found'){
       setCurrentUserPlan('basic');
     }else{

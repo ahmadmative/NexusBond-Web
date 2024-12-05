@@ -6,6 +6,7 @@ import Link from 'next/link';
 import styles from '../styles/Header.module.css';
 import logoImage from '../../public/assets/images/logoWithText.png';
 import { authService } from '@/api/services/auth.service';
+import ProfileDropdown from './ProfileDropdown';
 
 export default function Header() {
   const router = useRouter();
@@ -54,8 +55,7 @@ export default function Header() {
     };
   }, [pathname]); // Add pathname as dependency
 
-  const handleSignOut = (e) => {
-    e.preventDefault();
+  const handleSignOut = () => {
     authService.logout();
     setIsAuthenticated(false);
     setCurrentUser(null);
@@ -90,26 +90,21 @@ export default function Header() {
       <div className={styles.authButtons}>
         {isAuthenticated && currentUser ? (
           <div className={styles.userProfile}>
-            <div className={styles.profileImageContainer}>
+            {/* <div className={styles.profileImageContainer}>
               <Image
-                src={currentUser.profile_picture || '/assets/images/avatar.png'}
+                src={currentUser.profile_picture || '/assets/images/avatarHeader.png'}
                 alt={currentUser.name || 'User'}
                 width={50}
                 height={50}
                 className={styles.profileImage}
-                onClick={() => router.push('/profile')}
+                onClick={() => setIsOpen(!isOpen)}
                 style={{ cursor: 'pointer' }}
               />
-            </div>
-            {/* Only show sign out button if not in hideSignOutRoutes */}
-            {!shouldHideSignOut && (
-              <button
-                onClick={handleSignOut}
-                className={styles.registerNow}
-              >
-                Sign out
-              </button>
-            )}
+            </div> */}
+            <ProfileDropdown 
+              onSignOut={handleSignOut}
+              userName={currentUser.name || 'User'}
+            />
           </div>
         ) : (
           <Link href="/register" className={styles.registerNow}>

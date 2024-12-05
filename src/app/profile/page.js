@@ -60,20 +60,20 @@ export default function Profile() {
         <div className={styles.profileInfo}>
           <div className={styles.profileImageContainer}>
             <Image
-              src={user?.profilePicture || "/assets/images/avatar.png"}
+              src={user?.profilePicture || "/assets/images/avatarHeader.png"}
               alt="Profile"
               width={150}
               height={150}
               className={styles.profileImage}
             />
-            <div className={styles.editButton}>
+            {/* <div className={styles.editButton}>
               <Image
                 src="/assets/icons/editButton.png"
                 alt="Edit"
                 width={35}
                 height={35}
               />
-            </div>
+            </div> */}
           </div>
           <h2 className={styles.userName}>{user?.name || "User Name"}</h2>
         </div>
