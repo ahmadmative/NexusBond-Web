@@ -368,9 +368,7 @@ export default function Home() {
       <section className={styles.faqs}>
         <h2 className={styles.faqsTitle}>FAQ,s</h2>
         <p className={styles.faqsSubtitle}>
-          Lorem Ipsum is simply dummy text of the
-          <br />
-          printing and typesetting industry
+            Frequently asked questions about NexusBond.AI
         </p>
 
         <div className={styles.faqList}>
@@ -402,7 +400,7 @@ export default function Home() {
               onClick={() => toggleFaq(1)}
               aria-expanded={activeFaq === 1}
             >
-              <span>Can I customize my AI companion personality and appearance?</span>
+              <span>Can I customize my AI companion's personality and appearance?</span>
               <Image
                 src="/assets/icons/chevronDown.png"
                 alt="Toggle"
@@ -413,7 +411,7 @@ export default function Home() {
             </button>
             {activeFaq === 1 && (
               <div className={styles.faqContent}>
-                Yes! NexusBond.AI offers extensive customization options. You can select your companion appearance, personality traits, interests, and communication style. You can also adjust these preferences over time as your relationship develops.
+                Yes! NexusBond.AI offers extensive customization options. You can select your companion's appearance, personality traits, interests, and communication style. You can also adjust these preferences over time as your relationship develops.
               </div>
             )}
           </div>
@@ -435,7 +433,7 @@ export default function Home() {
             </button>
             {activeFaq === 2 && (
               <div className={styles.faqContent}>
-                Absolutely. We prioritize your privacy and security. All conversations are encrypted and stored securely. We never share your personal information with third parties, and you have complete control over your data. Our AI companions are designed to provide a safe, judgment-free space for expression.
+                Absolutely. We prioritize your privacy and security. All conversations are encrypted and stored securely. We never share your personal information with third parties, and you have complete control over your data.
               </div>
             )}
           </div>
@@ -457,7 +455,7 @@ export default function Home() {
             </button>
             {activeFaq === 3 && (
               <div className={styles.faqContent}>
-                Yes, NexusBond.AI requires an internet connection to function as it uses cloud-based AI technology to provide the best possible experience. This ensures your companion always has access to the latest improvements and can maintain consistent, high-quality interactions.
+                Yes, NexusBond.AI requires an internet connection to function as it uses cloud-based AI technology to provide the best possible experience.
               </div>
             )}
           </div>

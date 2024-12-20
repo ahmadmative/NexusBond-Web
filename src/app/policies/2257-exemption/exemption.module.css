@@ -1,0 +1,60 @@
+.policyContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.policyContent {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.policyContent h1 {
+  margin-bottom: 1rem;
+}
+
+.policyContent h2 {
+  margin: 2rem 0 1rem;
+  color: #333;
+}
+
+.policyContent p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.date {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.exemptionNotice {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #0070f3;
+  font-weight: 500;
+}
+
+.contactInfo {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #f0f4f8;
+  border-radius: 8px;
+}
+
+.link {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+} 

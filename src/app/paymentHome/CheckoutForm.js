@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import LoaderPopup from "@/components/LoaderPopup";
 import axios from "axios";
 import { authService } from "@/api/services/auth.service";
+import SuccessPopup from '@/components/SuccessPopup';
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -36,6 +37,7 @@ function CheckoutFormContent({ email: initialEmail, name, planId, planName, plan
   const [success, setSuccess] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   useEffect(() => {
     if (initialEmail) {
@@ -95,10 +97,11 @@ function CheckoutFormContent({ email: initialEmail, name, planId, planName, plan
         console.log(response.data);
         authService.setCurrentUser(response.data.user);
         setSuccess(true);
-        alert("Payment Successful!");
+        setShowSuccessPopup(true);
         setTimeout(() => {
+          setShowSuccessPopup(false);
           router.replace(`/profile`);
-        }, 1500);
+        }, 2000);
       } else {
         console.log(response.data);
       }
@@ -144,42 +147,51 @@ function CheckoutFormContent({ email: initialEmail, name, planId, planName, plan
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`${styles.form} ${loading ? styles.loading : ''}`}>
-      <div>
-        <label className={styles.cardLabel}>Email Address</label>
-        <input
-          className={styles.emailInput}
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
-          required
+    <>
+      <form onSubmit={handleSubmit} className={`${styles.form} ${loading ? styles.loading : ''}`}>
+        <div>
+          <label className={styles.cardLabel}>Email Address</label>
+          <input
+            className={styles.emailInput}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+
+        <div>
+          <label className={styles.cardLabel}>Card Information</label>
+          <div className={styles.cardElement}>
+            <CardElement options={CARD_ELEMENT_OPTIONS} />
+          </div>
+          {error && <div className={styles.error}>{error}</div>}
+        </div>
+
+        <Button
+          type="submit"
+          disabled={loading || !stripe}
+          width="100%"
+        >
+          {loading ? "Processing..." : `Pay $${planPrice}`}
+        </Button>
+
+        {success && (
+          <div className={styles.success}>
+            Payment successful!
+          </div>
+        )}
+      </form>
+      
+      {showSuccessPopup && (
+        <SuccessPopup 
+          message="Payment successful! Redirecting to your profile..."
+          onClose={() => setShowSuccessPopup(false)}
         />
-      </div>
-
-      <div>
-        <label className={styles.cardLabel}>Card Information</label>
-        <div className={styles.cardElement}>
-          <CardElement options={CARD_ELEMENT_OPTIONS} />
-        </div>
-        {error && <div className={styles.error}>{error}</div>}
-      </div>
-
-      <Button
-        type="submit"
-        disabled={loading || !stripe}
-        width="100%"
-      >
-        {loading ? "Processing..." : `Pay $${planPrice}`}
-      </Button>
-
-      {success && (
-        <div className={styles.success}>
-          Payment successful!
-        </div>
       )}
       {loading && <LoaderPopup />}
-    </form>
+    </>
   );
 }
 

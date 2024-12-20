@@ -722,30 +722,25 @@
 }
 
 .faqs {
-  width: 100%;
-  max-width: 1200px;
-  margin: 6rem auto;
-  padding: 0 2rem;
+  padding: 4rem 2rem;
+  text-align: center;
 }
 
 .faqsTitle {
+  color: #99C5FF;
   font-size: 2.5rem;
-  color: #7CB9E8;
-  text-align: center;
   margin-bottom: 1rem;
 }
 
 .faqsSubtitle {
-  text-align: center;
   color: #666;
-  margin-bottom: 4rem;
-  line-height: 1.5;
+  margin-bottom: 3rem;
+  line-height: 1.6;
 }
 
 .faqList {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  max-width: 1000px;
+  margin: 0 auto 3rem;
 }
 
 .faqItem {
@@ -762,8 +757,8 @@
   border: none;
   cursor: pointer;
   text-align: left;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  color: #333;
 }
 
 .faqButton span {
@@ -771,53 +766,33 @@
   padding-right: 2rem;
 }
 
-.faqButton img {
-  transition: transform 0.3s ease;
+.faqContent {
+  padding: 0 0 1.5rem;
+  color: #666;
+  line-height: 1.6;
+  text-align: left;
 }
 
 .rotated {
   transform: rotate(180deg);
 }
 
-.faqContent {
-  padding: 0 0 1.5rem;
-  color: #666;
-  line-height: 1.6;
-  animation: slideDown 0.3s ease-out;
+.viewAllContainer {
+  margin-top: 3rem;
+  text-align: center;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.downloadButton {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: linear-gradient(45deg, #7CB9E8, #7CB9E8);
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .faqsTitle {
-    font-size: 2rem;
-  }
-
-  .faqButton {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .faqs {
-    margin: 3rem auto;
-    padding: 0 1rem;
-  }
-
-  .faqsTitle {
-    font-size: 1.8rem;
-  }
-
-  .faqButton {
-    font-size: 1rem;
-  }
+.downloadButton:hover {
+  opacity: 0.9;
 } 

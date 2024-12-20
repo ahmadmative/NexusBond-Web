@@ -77,52 +77,43 @@ export default function Header() {
         </Link>
       </div>
 
-      {!isAuthenticated && (
-        <nav className={`${styles.nav} ${isOpen ? styles.active : ''}`}>
-          <ul className={styles.navList}>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/login">Login</Link></li>
-            <li><Link href="/pricing">Pricing</Link></li>
-          </ul>
-        </nav>
-      )}
+      <nav className={`${styles.nav} ${isOpen ? styles.active : ''}`}>
+        <ul className={styles.navList}>
+          <li><Link href="/">HOME</Link></li>
+          <li><Link href="/about">ABOUT</Link></li>
+          <li><Link href="/pricing">PRICING</Link></li>
+          <li><Link href="/contact">CONTACT</Link></li>
+        </ul>
+      </nav>
 
       <div className={styles.authButtons}>
         {isAuthenticated && currentUser ? (
           <div className={styles.userProfile}>
-            {/* <div className={styles.profileImageContainer}>
-              <Image
-                src={currentUser.profile_picture || '/assets/images/avatarHeader.png'}
-                alt={currentUser.name || 'User'}
-                width={50}
-                height={50}
-                className={styles.profileImage}
-                onClick={() => setIsOpen(!isOpen)}
-                style={{ cursor: 'pointer' }}
-              />
-            </div> */}
             <ProfileDropdown 
               onSignOut={handleSignOut}
               userName={currentUser.name || 'User'}
             />
           </div>
         ) : (
-          <Link href="/register" className={styles.registerNow}>
-            Register Now
-          </Link>
+          <div className={styles.authButtonsContainer}>
+            <Link href="/login" className={styles.loginButton}>
+              LOGIN
+            </Link>
+            <Link href="/register" className={styles.registerNow}>
+              Register Now
+            </Link>
+          </div>
         )}
       </div>
 
-      {!isAuthenticated && (
-        <button
-          className={`${styles.hamburger} ${isOpen ? styles.active : ''}`}
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      )}
+      <button
+        className={`${styles.hamburger} ${isOpen ? styles.active : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </header>
   );
 } 

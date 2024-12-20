@@ -1,0 +1,98 @@
+.policyContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.policyContent {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.policyContent h1 {
+  color: #1F2937;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.policyContent h2 {
+  color: #374151;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.date {
+  color: #6B7280;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.introduction {
+  margin-bottom: 2.5rem;
+}
+
+.introduction p {
+  color: #4B5563;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.section h3 {
+  color: #1F2937;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.section h4 {
+  color: #374151;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 1.5rem 0 1rem;
+}
+
+.section p {
+  color: #4B5563;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.subsection {
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+}
+
+.subsection p {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .policyContent {
+    padding: 1.5rem;
+  }
+
+  .policyContent h1 {
+    font-size: 2rem;
+  }
+
+  .policyContent h2 {
+    font-size: 1.5rem;
+  }
+
+  .section h3 {
+    font-size: 1.2rem;
+  }
+
+  .section h4 {
+    font-size: 1.1rem;
+  }
+} 
