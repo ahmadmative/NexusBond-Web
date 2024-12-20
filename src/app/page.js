@@ -400,7 +400,7 @@ export default function Home() {
               onClick={() => toggleFaq(1)}
               aria-expanded={activeFaq === 1}
             >
-              <span>Can I customize my AI companion's personality and appearance?</span>
+              <span>Can I customize my AI companions personality and appearance?</span>
               <Image
                 src="/assets/icons/chevronDown.png"
                 alt="Toggle"
@@ -411,7 +411,7 @@ export default function Home() {
             </button>
             {activeFaq === 1 && (
               <div className={styles.faqContent}>
-                Yes! NexusBond.AI offers extensive customization options. You can select your companion's appearance, personality traits, interests, and communication style. You can also adjust these preferences over time as your relationship develops.
+                Yes! NexusBond.AI offers extensive customization options. You can select your companions appearance, personality traits, interests, and communication style. You can also adjust these preferences over time as your relationship develops.
               </div>
             )}
           </div>

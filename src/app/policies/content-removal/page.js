@@ -1,6 +1,6 @@
-'use client';
-import Link from 'next/link';
-import styles from './content-removal.module.css';
+"use client";
+import Link from "next/link";
+import styles from "./content-removal.module.css";
 
 export default function ContentRemovalPolicy() {
   return (
@@ -26,7 +26,7 @@ export default function ContentRemovalPolicy() {
           <div className={styles.subsection}>
             <h3>2. Content Removal Process</h3>
             <p>
-              If a user believes that any content on our APP or website bears resemblance to them or another actual person, they can request its removal by contacting our support team at{' '}
+              If a user believes that any content on our APP or website bears resemblance to them or another actual person, they can request its removal by contacting our support team at{" "}
               <a href="mailto:info@NexusBond.AI" className={styles.link}>info@NexusBond.AI</a> or directly report their concern in the APP or website in the <Link href="/contact" className={styles.link}>"Contact"</Link> section. We will thoroughly review the request and take appropriate action within a reasonable timeframe.
             </p>
           </div>
@@ -55,7 +55,7 @@ export default function ContentRemovalPolicy() {
           <div className={styles.subsection}>
             <h3>6. Contact Information</h3>
             <p>
-              If you have any questions or require further clarification regarding our Content Removal Policy, please contact us at:{' '}
+              If you have any questions or require further clarification regarding our Content Removal Policy, please contact us at:{" "}
               <a href="mailto:info@NexusBond.AI" className={styles.link}>info@NexusBond.AI</a> or directly report in the APP or website in the <Link href="/contact" className={styles.link}>"Contact"</Link> section. We are committed to addressing concerns in a timely manner and ensuring a positive experience for all our users.
             </p>
           </div>
@@ -79,7 +79,7 @@ export default function ContentRemovalPolicy() {
             <div className={styles.reportingProcess}>
               <h3>Reporting Mechanism:</h3>
               <p>
-                Users can report inappropriate content directly to our support team at{' '}
+                Users can report inappropriate content directly to our support team at{" "}
                 <a href="mailto:info@NexusBond.AI" className={styles.link}>info@NexusBond.AI</a>
               </p>
 

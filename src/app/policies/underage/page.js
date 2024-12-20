@@ -1,6 +1,6 @@
-'use client';
-import Link from 'next/link';
-import styles from './underage.module.css';
+"use client";
+import Link from "next/link";
+import styles from "./underage.module.css";
 
 export default function UnderagePolicy() {
   return (
@@ -37,7 +37,7 @@ export default function UnderagePolicy() {
               A transparent disclaimer emphasizes that users must be 18 years or older to access our services. Users are also notified that providing inaccurate information about their age constitutes a violation of our Terms of Service.
             </p>
             <p>
-              Nexusbond.AI cannot be held responsible for any inaccuracies or misrepresentations regarding user age. It is the user's responsibility to ensure compliance with their local laws and regulations regarding the access and consumption of the content.
+              Nexusbond.AI cannot be held responsible for any inaccuracies or misrepresentations regarding user age. It is the user"s responsibility to ensure compliance with their local laws and regulations regarding the access and consumption of the content.
             </p>
           </div>
 
@@ -57,7 +57,7 @@ export default function UnderagePolicy() {
           <div className={styles.subsection}>
             <h3>3. Content Moderation</h3>
             <p>
-              We at Nexusbond.AI value safety, respect and integrity of all our users. While conversations between users and AI Companions are generally confidential, we have implemented a content moderation filter, based on our proprietary technology to ensure compliance with our Terms and Policies, in particular with our Blocked Content Policy. In the event that the moderation filter detects any content that violates our terms, we reserve the right to manually review the flagged content and take appropriate action, which may include terminating the user's account. This measure is implemented to maintain a respectful and secure environment for all users. We strive to strike a balance between privacy and community standards, and we appreciate your understanding and cooperation in adhering to our guidelines.
+              We at Nexusbond.AI value safety, respect and integrity of all our users. While conversations between users and AI Companions are generally confidential, we have implemented a content moderation filter, based on our proprietary technology to ensure compliance with our Terms and Policies, in particular with our Blocked Content Policy. In the event that the moderation filter detects any content that violates our terms, we reserve the right to manually review the flagged content and take appropriate action, which may include terminating the user"s account. This measure is implemented to maintain a respectful and secure environment for all users. We strive to strike a balance between privacy and community standards, and we appreciate your understanding and cooperation in adhering to our guidelines.
             </p>
           </div>
 
@@ -71,7 +71,7 @@ export default function UnderagePolicy() {
           <div className={styles.subsection}>
             <h3>5. Contact Information</h3>
             <p>
-              If you have noticed any violation of these Terms from your perspective, content of any nature whatsoever or you have any questions or require further clarification regarding our Underage Policy, please contact us at:{' '}
+              If you have noticed any violation of these Terms from your perspective, content of any nature whatsoever or you have any questions or require further clarification regarding our Underage Policy, please contact us at:{" "}
               <a href="mailto:info@NexusBond.ai" className={styles.link}>info@NexusBond.ai</a> or directly report in the APP or website in the <Link href="/contact" className={styles.link}>"Contact"</Link> section.
             </p>
           </div>

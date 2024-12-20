@@ -21,7 +21,7 @@ export default function ExemptionPolicy() {
 
           <div className={styles.contactInfo}>
             <p>
-              If you have any question or require further clarification regarding 18 U.S.C. 2257 Exemption, please contact us at{' '}
+              If you have any question or require further clarification regarding 18 U.S.C. 2257 Exemption, please contact us at{""}
               <a href="mailto:info@nexusbond.ai" className={styles.link}>info@nexusbond.ai</a> or directly report in the APP or website in the <Link href="/contact" className={styles.link}>"contact"</Link> section.
             </p>
           </div>

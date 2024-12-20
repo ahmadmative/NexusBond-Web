@@ -1,6 +1,6 @@
-'use client';
-import Link from 'next/link';
-import styles from './blocked.module.css';
+"use client";
+import Link from "next/link";
+import styles from "./blocked.module.css";
 
 export default function BlockedContentPolicy() {
   return (
@@ -59,7 +59,7 @@ export default function BlockedContentPolicy() {
           <div className={styles.subsection}>
             <h3>3. Content Moderation</h3>
             <p>
-              While conversations between users and AI Companions are generally confidential, we have implemented a content moderation filter, to ensure compliance with our Terms and Policies, in particular with our Blocked Content Policy. In the event that the moderation filter detects any content that violates our terms, we reserve the right to manually review the flagged content and take appropriate action, which may include terminating the user's account. This measure is implemented to maintain a respectful and secure environment for all users. We strive to strike a balance between privacy and community standards, and we appreciate your understanding and cooperation in adhering to our guidelines.
+              While conversations between users and AI Companions are generally confidential, we have implemented a content moderation filter, to ensure compliance with our Terms and Policies, in particular with our Blocked Content Policy. In the event that the moderation filter detects any content that violates our terms, we reserve the right to manually review the flagged content and take appropriate action, which may include terminating the users account. This measure is implemented to maintain a respectful and secure environment for all users. We strive to strike a balance between privacy and community standards, and we appreciate your understanding and cooperation in adhering to our guidelines.
             </p>
           </div>
 
@@ -73,7 +73,7 @@ export default function BlockedContentPolicy() {
           <div className={styles.subsection}>
             <h3>5. Contact Information</h3>
             <p>
-              If you have noticed any violation of these Terms from your perspective, content of any nature whatsoever or you have any questions or require further clarification regarding our Blocked Content Policy, please contact us at{' '}
+              If you have noticed any violation of these Terms from your perspective, content of any nature whatsoever or you have any questions or require further clarification regarding our Blocked Content Policy, please contact us at{" "}
               <a href="mailto:info@NexusBond.AI" className={styles.link}>info@NexusBond.AI</a> or directly report in the app and website in the <Link href="/contact" className={styles.link}>"Contact"</Link> section.
             </p>
           </div>

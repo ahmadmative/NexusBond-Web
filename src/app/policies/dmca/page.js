@@ -1,5 +1,5 @@
-'use client';
-import styles from './dmca.module.css';
+"use client";
+import styles from "./dmca.module.css";
 
 export default function DMCAPolicy() {
   return (
@@ -34,7 +34,7 @@ export default function DMCAPolicy() {
               d. A statement by you that you have a good-faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law;
             </li>
             <li>
-              e. A statement by you, made under penalty of perjury, that the above information in your notice is accurate and that you are the copyright owner or authorized to act on the copyright owner's behalf.
+              e. A statement by you, made under penalty of perjury, that the above information in your notice is accurate and that you are the copyright owner or authorized to act on the copyright owner"s behalf.
             </li>
           </ul>
         </section>
