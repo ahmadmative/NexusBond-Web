@@ -11,7 +11,7 @@ export default function BlockedContentPolicy() {
 
         <div className={styles.introduction}>
           <p>
-            At NexusBond.AI, we are committed to providing a secure, respectful, and lawful online environment for all users. Even though users cannot upload any content on our app or website and can "only" chat and initiate the creation of AI generated content, which is accessible only to the specific user in his/her private space and is not accessible publicly, there are categories of content strictly forbidden on our APP and website and outlined as follows:
+            At NexusBond.AI, we are committed to providing a secure, respectful, and lawful online environment for all users. Even though users cannot upload any content on our app or website and can only chat and initiate the creation of AI generated content, which is accessible only to the specific user in his/her private space and is not accessible publicly, there are categories of content strictly forbidden on our APP and website and outlined as follows:
           </p>
         </div>
 
@@ -73,8 +73,8 @@ export default function BlockedContentPolicy() {
           <div className={styles.subsection}>
             <h3>5. Contact Information</h3>
             <p>
-              If you have noticed any violation of these Terms from your perspective, content of any nature whatsoever or you have any questions or require further clarification regarding our Blocked Content Policy, please contact us at{" "}
-              <a href="mailto:info@NexusBond.AI" className={styles.link}>info@NexusBond.AI</a> or directly report in the app and website in the <Link href="/contact" className={styles.link}>"Contact"</Link> section.
+              If you have noticed any violation of these Terms from your perspective, content of any nature whatsoever or you have any questions or require further clarification regarding our Blocked Content Policy, please contact us at{}
+              <a href="mailto:info@NexusBond.AI" className={styles.link}>info@NexusBond.AI</a> or directly report in the app and website in the <Link href="/contact" className={styles.link}>Contact</Link> section.
             </p>
           </div>
 

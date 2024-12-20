@@ -11,7 +11,7 @@ export default function ComplaintPolicy() {
 
         <div className={styles.introduction}>
           <p>
-            At NexusBond.AI we value our users and strive to provide a positive experience with NexusBond.AI. We understand that concerns or complaints may arise from time to time, and we are committed to addressing them. At NexusBond.AI, your feedback matters. We"re committed to continuous improvement and want to address any concerns you may have promptly and effectively. This Complaints Policy outlines a clear process for reporting and resolving issues related to our services.
+            At NexusBond.AI we value our users and strive to provide a positive experience with NexusBond.AI. We understand that concerns or complaints may arise from time to time, and we are committed to addressing them. At NexusBond.AI, your feedback matters. Were committed to continuous improvement and want to address any concerns you may have promptly and effectively. This Complaints Policy outlines a clear process for reporting and resolving issues related to our services.
           </p>
         </div>
 
@@ -71,7 +71,7 @@ export default function ComplaintPolicy() {
 
           <div className={styles.contact}>
             <p>
-              For any questions or concerns regarding this policy, please contact us at{" "}
+              For any questions or concerns regarding this policy, please contact us at{ }
               <a href="mailto:info@NexusBond.AI" className={styles.link}>info@NexusBond.AI</a>
             </p>
           </div>

@@ -11,7 +11,7 @@ export default function CommunityGuidelines() {
 
         <div className={styles.introduction}>
           <p>
-            Our community rules play an important role in maintaining a positive experience for our users. Please follow these rules, in addition to all applicable laws, the NexusBond.AI Terms of Use, the NexusBond.AI Privacy Policy, and all posted rules, when using the NexusBond.AI service. When we are notified or otherwise become aware of a potential rule violation, we may review and take action, including limiting or terminating a user"s access to the community or app, or as otherwise specified in these rules. For more information, please see our <Link href="/policies/terms" className={styles.link}>Terms of Use</Link>.
+            Our community rules play an important role in maintaining a positive experience for our users. Please follow these rules, in addition to all applicable laws, the NexusBond.AI Terms of Use, the NexusBond.AI Privacy Policy, and all posted rules, when using the NexusBond.AI service. When we are notified or otherwise become aware of a potential rule violation, we may review and take action, including limiting or terminating a users access to the community or app, or as otherwise specified in these rules. For more information, please see our <Link href="/policies/terms" className={styles.link}>Terms of Use</Link>.
           </p>
           <p>
             We may modify these rules, so please check back here from time to time. NexusBond.AI is available only to users 18 and older.
@@ -54,7 +54,7 @@ export default function CommunityGuidelines() {
               Our users play an important role in reporting content or behavior that may violate our Community Guidelines. If anything happens that makes you feel uncomfortable or unsafe, we highly encourage you to stop interacting with the character.
             </p>
             <p>
-              If you encounter content, a character, or a user that you believe violates the above rules, please report it to us at{" "}
+              If you encounter content, a character, or a user that you believe violates the above rules, please report it to us at{}
               <a href="mailto:info@NexusBond.AI" className={styles.link}>info@NexusBond.AI</a>
             </p>
           </div>

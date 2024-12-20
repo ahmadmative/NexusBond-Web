@@ -11,17 +11,17 @@ export default function SafetyCenter() {
 
         <div className={styles.introduction}>
           <p>
-            At NexusBond.AI, we take safety seriously. The first step in building a safe product is knowing what you stand for. At NexusBond.AI, we believe in providing a positive experience that enriches our users" lives while avoiding negative impacts for users and the broader Community.
+            At NexusBond.AI, we take safety seriously. The first step in building a safe product is knowing what you stand for. At NexusBond.AI, we believe in providing a positive experience that enriches our users lives while avoiding negative impacts for users and the broader Community.
           </p>
           <p>
             We recognize that these technologies are quickly evolving and can raise safety questions. We take that very seriously. We will continue to evolve our policies with our technology:
           </p>
           <ul>
-            <li>We"ll carefully design our policies to promote safety, avoid harm, and prioritize the well-being of our community.</li>
-            <li>We"ll align our product development to those policies, and prioritize safety as our products evolve.</li>
+            <li>Well carefully design our policies to promote safety, avoid harm, and prioritize the well-being of our community.</li>
+            <li>Well align our product development to those policies, and prioritize safety as our products evolve.</li>
           </ul>
           <p>
-            Those commitments are easy to articulate and harder to put to practice. The field of AI safety is still very new, and we won"t always get it right: Sometimes our policies won"t be correctly calibrated. And sometimes the technological protections we build won"t work as intended, or will be works in progress. We are committed to creating an ongoing cycle of review and improvement, being transparent when we fail, and are constantly striving to improve the safety and reliability of our products.
+            Those commitments are easy to articulate and harder to put to practice. The field of AI safety is still very new, and we wont always get it right: Sometimes our policies wont be correctly calibrated. And sometimes the technological protections we build wont work as intended, or will be works in progress. We are committed to creating an ongoing cycle of review and improvement, being transparent when we fail, and are constantly striving to improve the safety and reliability of our products.
           </p>
         </div>
 
@@ -45,14 +45,14 @@ export default function SafetyCenter() {
               <li>Furthers or promotes criminal activity;</li>
               <li>Seeks to buy or sell illegal drugs;</li>
               <li>Infringes Third-Party IP;</li>
-              <li>Constitutes a "deepfake" or impersonation of any kind.</li>
+              <li>Constitutes a deepfake or impersonation of any kind.</li>
             </ul>
           </div>
 
           <div className={styles.subsection}>
             <h3>AI-Generated Content</h3>
             <p>
-              Our approach to AI-Generated content flows from a simple principle: Our product should never produce responses that are likely to harm users or others. That means working to ensure, among other things, that Characters do not suggest violence, dangerous or illegal conduct, or incite hatred; that they protect users" private information; and that Characters do not create or echo harmful misinformation. And more generally, it means seeking to train and fine-tune our model such that our Characters will follow the same content standards we apply to our users.
+              Our approach to AI-Generated content flows from a simple principle: Our product should never produce responses that are likely to harm users or others. That means working to ensure, among other things, that Characters do not suggest violence, dangerous or illegal conduct, or incite hatred; that they protect users private information; and that Characters do not create or echo harmful misinformation. And more generally, it means seeking to train and fine-tune our model such that our Characters will follow the same content standards we apply to our users.
             </p>
             <p>
               It is worth explicitly calling out that parts of this commitment are aspirational. No AI is currently perfect at preventing this sort of content, especially when a user intentionally tries to get the AI to produce it. However, we are committed to a journey of continued improvement, with this approach to AI-Generated content as our guidepost.
@@ -68,10 +68,10 @@ export default function SafetyCenter() {
               We give users control over their data. At the heart of online privacy is a simple rule: make sure users are in control. We put that principle to practice by ensuring you always have easy-to-use tools to access your data, delete your data, and delete your account.
             </p>
             <p>
-              We don"t sell user data, or share it for anything other than basic analytics. To date, we share data only with standard Internet analytics providers – the companies that help apps and websites understand their traffic. If that ever changes, we"ll be very clear about it and get our users consent upfront.
+              We dont sell user data, or share it for anything other than basic analytics. To date, we share data only with standard Internet analytics providers the companies that help apps and websites understand their traffic. If that ever changes, well be very clear about it and get our users consent upfront.
             </p>
             <p>
-              We"re careful with the information our users share. Our users interact with Characters as they do with friends, and so they sometimes share details about their lives. To make sure they can do so safely, we are committed to taking exceptional care of that data. We design our features to ensure that users always have easy-to-understand notice before they make any post viewable by others.
+              Were careful with the information our users share. Our users interact with Characters as they do with friends, and so they sometimes share details about their lives. To make sure they can do so safely, we are committed to taking exceptional care of that data. We design our features to ensure that users always have easy-to-understand notice before they make any post viewable by others.
             </p>
             <p>
               Please see our <Link href="/policies/privacy" className={styles.link}>Privacy Policy</Link> for more details.
@@ -81,10 +81,10 @@ export default function SafetyCenter() {
           <div className={styles.subsection}>
             <h3>Content Moderation</h3>
             <p>
-              <strong>Automated Tools.</strong> We use proprietary tools to block violating content before it can ever be posted. Like other solutions in this space, these tools aren"t perfect. But they"re evolving quickly and we will continue to improve them over time.
+              <strong>Automated Tools.</strong> We use proprietary tools to block violating content before it can ever be posted. Like other solutions in this space, these tools arent perfect. But theyre evolving quickly and we will continue to improve them over time.
             </p>
             <p>
-              <strong>Reporting.</strong> We give our users a host of tools so they can report content – whether from a Character or a user – that they believe violates our Terms. Our website also contains our contact information to serve as a reporting option so users can reach us to report improper content.
+              <strong>Reporting.</strong> We give our users a host of tools so they can report content whether from a Character or a user that they believe violates our Terms. Our website also contains our contact information to serve as a reporting option so users can reach us to report improper content.
             </p>
             <p>
               <strong>Moderation.</strong> We are committed to promptly taking appropriate action on flagged and reported content. We take action by warning users, deleting content, suspending users, and banning users as warranted.

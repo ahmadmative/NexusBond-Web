@@ -28,7 +28,7 @@ export default function TermsOfService() {
                 <section className={styles.section}>
                     <h3>1. General</h3>
                     <p>
-                        Nexusbond.AI is an online chat application that uses artificial intelligence ("AI") algorithms to generate virtual and fictional characters. NexusBond.AI generates messages, so that you can chat with the AI characters. Parts of the Services offered by NexusBond.AI may require you to create a user account.
+                        Nexusbond.AI is an online chat application that uses artificial intelligence (AI) algorithms to generate virtual and fictional characters. NexusBond.AI generates messages, so that you can chat with the AI characters. Parts of the Services offered by NexusBond.AI may require you to create a user account.
                     </p>
                     <p>
                         To begin with, you need generate your own AI character (both physical and personality characteristics) using our algorithms. You can then start a conversation with your generated character(s).
@@ -36,7 +36,7 @@ export default function TermsOfService() {
 
                     <div className={styles.subsection}>
                         <h4>1.1 Account</h4>
-                        <p>Parts of the Services offered by NexusBond.AI may require you to create a user account using user email and password (the “Protected Areas”). In the event of accessing Protected Areas, you agree to access only using your registered email address and password. You can sign-up (register) or login using your email address.
+                        <p>Parts of the Services offered by NexusBond.AI may require you to create a user account using user email and password (the Protected Areas). In the event of accessing Protected Areas, you agree to access only using your registered email address and password. You can sign-up (register) or login using your email address.
 
                             You hereby represent and warrant that all information you submit to create a user account is true and correct, you are given full rights to submit such information.</p><p>
 
@@ -121,10 +121,10 @@ export default function TermsOfService() {
                             You will not interfere with or circumvent any security feature of NexusBond.AI or any feature that restricts or enforces limitations on the use of NexusBond.AI;
                         </li>
                         <li>
-                            You will not use NexusBond.AI to gain unauthorized access to our or any third party"s data, systems, or networks;
+                            You will not use NexusBond.AI to gain unauthorized access to our or any third partys data, systems, or networks;
                         </li>
                         <li>
-                            You will not use NexusBond.AI in any manner that could damage, disable, overburden, impair, or otherwise interfere with or disrupt our systems and networks, or otherwise interfere with other users" use of NexusBond.AI;
+                            You will not use NexusBond.AI in any manner that could damage, disable, overburden, impair, or otherwise interfere with or disrupt our systems and networks, or otherwise interfere with other users use of NexusBond.AI;
                         </li>
                         <li>
                             You will not use NexusBond.AI in any way that, in our sole discretion, may expose us and others to liability or damages;
@@ -158,7 +158,7 @@ export default function TermsOfService() {
                         We value the safety and integrity of all our users. While conversations between users and AI characters are generally confidential, we have implemented a content moderation filter to ensure compliance with our Terms and Policies.
                     </p>
                     <p>
-                        In the event that the moderation filter detects any content that violates our terms, we reserve the right to manually review the flagged content and take appropriate action, which may include terminating the user"s account. This measure is implemented to maintain a respectful and secure environment for all users. We strive to strike a balance between privacy and community standards, and we appreciate your understanding and cooperation in adhering to our guidelines.
+                        In the event that the moderation filter detects any content that violates our terms, we reserve the right to manually review the flagged content and take appropriate action, which may include terminating the users account. This measure is implemented to maintain a respectful and secure environment for all users. We strive to strike a balance between privacy and community standards, and we appreciate your understanding and cooperation in adhering to our guidelines.
                     </p>
                 </section>
                 <section className={styles.section}>
@@ -230,7 +230,7 @@ export default function TermsOfService() {
                 <section className={styles.section}>
                     <h3>12. Liability</h3>
                     <p>
-                        NexusBond.AI is provided to you on an "AS-IS" and "AS AVAILABLE" basis, and the use thereof is at your sole risk. We make no, and hereby disclaim, any representations or warranties of any kind, express, implied, statutory, or otherwise, including the warranties of merchantability, fitness for a particular purpose, satisfactory quality, noninfringement, and title with respect to NexusBond.AI, to the fullest extent permissible under applicable law.
+                        NexusBond.AI is provided to you on an AS-IS and AS AVAILABLE basis, and the use thereof is at your sole risk. We make no, and hereby disclaim, any representations or warranties of any kind, express, implied, statutory, or otherwise, including the warranties of merchantability, fitness for a particular purpose, satisfactory quality, noninfringement, and title with respect to NexusBond.AI, to the fullest extent permissible under applicable law.
                     </p>
                     <ul>
                         <li>NexusBond.AI (or the results obtained from the use thereof) will be timely, error-free, secure, or uninterrupted.</li>
@@ -271,7 +271,7 @@ export default function TermsOfService() {
                         We reserve the right to update or make changes to these TOS and/or any other Terms and Policies documents from time to time in our sole discretion, and we may notify you of changes by making the revised version of these documents accessible through NexusBond.AI. Such changes will become effective immediately. Please return to these documents periodically to ensure familiarity with the latest version, so that you can determine when these documents were last revised by referring to the “Date of Revision” at the top of this page. If you do not agree with the revised Terms and Policies, you have the right and should immediately stop using NexusBond.AI. Your continued access or use of NexusBond.AI after any changes to these documents have been posted means your agreement and consent to such changes.
                     </p>
                     <p>
-                        We reserve the right to change the Services" scope and change the fees applicable to the Services at any time for any reason in our sole discretion and without notice. We are entitled to stop or restrict the provision of the Services in full or in part toward a certain user. We retain powers to discontinue provision and/or support of the Services without any prior notice.
+                        We reserve the right to change the Services scope and change the fees applicable to the Services at any time for any reason in our sole discretion and without notice. We are entitled to stop or restrict the provision of the Services in full or in part toward a certain user. We retain powers to discontinue provision and/or support of the Services without any prior notice.
                     </p>
                 </section>
 

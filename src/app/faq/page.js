@@ -14,7 +14,7 @@ export default function FAQ() {
       question: "What kind of content does the service not support?",
       answer: (
         <>
-          <p>We respect our user's right to engage with fictionalized content. However, publicly we do not condone any of the following:</p>
+          <p>We respect our users right to engage with fictionalized content. However, publicly we do not condone any of the following:</p>
           <ul>
             <li>Any form of child pornography</li>
             <li>Fictional characters should be able to be glanced at and assumed to be at least 18 years old.</li>
@@ -37,15 +37,15 @@ export default function FAQ() {
       answer: "All chats and characters you create are private. You are responsible for ensuring the content you share meets our ToS. If you feel something approaching the lines of not passing our community standards, please stop and report it immediately."
     },
     {
-      question: "I can't login. What should I do?",
-      answer: "If you are unable to login due to an error code, please repeat the process after clearing your cache and ensuring that you are fully logged into the browser with your primary email. It is important to NEVER use a \"throwaway\" email, as we have no method of resetting your passwords! You are responsible for your own account's security. Please be aware of the risks."
+      question: "I cant login. What should I do?",
+      answer: "If you are unable to login due to an error code, please repeat the process after clearing your cache and ensuring that you are fully logged into the browser with your primary email. It is important to NEVER use a \"throwaway\" email, as we have no method of resetting your passwords! You are responsible for your own accounts security. Please be aware of the risks."
     },
     {
       question: "How can I appeal a character ban?",
-      answer: "You may contact us via support at info@NexusBond.ai to receive assistance concerning the reasoning behind a character's termination. An appeal is not guaranteed, and prohibited/flagged content will not be restored."
+      answer: "You may contact us via support at info@NexusBond.ai to receive assistance concerning the reasoning behind a characters termination. An appeal is not guaranteed, and prohibited/flagged content will not be restored."
     },
     {
-      question: "Why can't I always see ads on the app?",
+      question: "Why cant I always see ads on the app?",
       answer: "Various factors, including geographic location, ad inventory, and network conditions, may prevent ads from displaying properly at certain times. We are working to improve the situation and appreciate your patience and support."
     },
     {
@@ -53,8 +53,8 @@ export default function FAQ() {
       answer: (
         <>
           <ul>
-            <li>Change the language of the model's replies in the chat settings.</li>
-            <li>Send the character the language you want it to reply in, for example, "Please reply to me in English."</li>
+            <li>Change the language of the models replies in the chat settings.</li>
+            <li>Send the character the language you want it to reply in, for example, Please reply to me in English.</li>
             <li>We are continuously striving to enable more models to speak more languages.</li>
           </ul>
         </>
@@ -148,12 +148,12 @@ export default function FAQ() {
       answer: (
         <>
           <p><strong>Please note! Once deleted, the account cannot be recovered.</strong></p>
-          <p>Go to your profile page, click the "Settings" button, and then select the "Delete Account" option.</p>
+          <p>Go to your profile page, click the Settings button, and then select the Delete Account option.</p>
         </>
       )
     },
     {
-      question: "Why can't I delete my account?",
+      question: "Why cant I delete my account?",
       answer: (
         <>
           <p><strong>Please note! Once deleted, the account cannot be recovered.</strong></p>
@@ -162,7 +162,7 @@ export default function FAQ() {
             <li>Ensure you do not have an active subscription, as accounts with active subscriptions cannot be deleted.</li>
             <li>Verify that your internet connection is stable, as network issues can also prevent account deletion.</li>
           </ul>
-          <p>If you have checked both and still can't delete the account, please contact our support team at{' '}
+          <p>If you have checked both and still cant delete the account, please contact our support team at{ }
             <a href="mailto:info@NexusBond.ai" className={styles.link}>info@NexusBond.ai</a>
           </p>
         </>
@@ -204,7 +204,7 @@ export default function FAQ() {
       answer: "We ask for this information because we require users to be over a minimum age to engage with Characters and help meet our legal obligations. While we will not display your age or birthday publicly, we may also use this information for the purposes stated in our Privacy Policy, including to personalize your experience, help keep our Services safe, learn more about how our Services are used, and improve our Services."
     },
     {
-      question: "What is the company's stance on NSFW Filters?",
+      question: "What is the companys stance on NSFW Filters?",
       answer: "NexusBond.AI does not and will not support the use of the software for vulgar, obscene or pornographic content (per FAQ, ToS). We are not encouraging discussion of NSFW filters - our stance is final, and requesting them to be removed on any of our platforms will result in a ban."
     },
     {
@@ -237,7 +237,7 @@ export default function FAQ() {
     },
     {
       question: "Can I switch between different AI characters during a chat session?",
-      answer: "Currently, you can access one AI character per session. If you'd like to chat with a different character, you can start a new session with them."
+      answer: "Currently, you can access one AI character per session. If youd like to chat with a different character, you can start a new session with them."
     },
     {
       question: "Are the AI characters always available?",
@@ -252,7 +252,7 @@ export default function FAQ() {
       answer: "There is an unpaid membership but limited in chat capability."
     },
     {
-      question: "Can I provide feedback on the AI character's performance?",
+      question: "Can I provide feedback on the AI characters performance?",
       answer: "We welcome your feedback to continually improve our AI characters. You can provide feedback directly on info@NexusBond.ai"
     },
     {
@@ -265,7 +265,7 @@ export default function FAQ() {
     <div className={styles.container}>
       <h1 className={styles.mainTitle}>FAQ,s</h1>
       <p className={styles.description}>
-        This is an evolving list of questions we're asked about the product. If you have a question that is not listed, please send us an email to{' '}
+        This is an evolving list of questions were asked about the product. If you have a question that is not listed, please send us an email to{ }
         <a href="mailto:info@NexusBond.ai" className={styles.link}>info@NexusBond.ai</a>
       </p>
 
@@ -285,7 +285,7 @@ export default function FAQ() {
                   alt="Toggle"
                   width={30}
                   height={30}
-                  className={activeGeneral === index ? styles.rotated : ''}
+                  className={activeGeneral === index ? styles.rotated : styles.chevron}
                 />
               </button>
               {activeGeneral === index && (
@@ -314,7 +314,7 @@ export default function FAQ() {
                   alt="Toggle"
                   width={30}
                   height={30}
-                  className={activeSubscription === index ? styles.rotated : ''}
+                  className={activeSubscription === index ? styles.rotated : styles.chevron}
                 />
               </button>
               {activeSubscription === index && (
@@ -343,7 +343,7 @@ export default function FAQ() {
                   alt="Toggle"
                   width={30}
                   height={30}
-                  className={activeAccount === index ? styles.rotated : ''}
+                  className={activeAccount === index ? styles.rotated : styles.chevron}
                 />
               </button>
               {activeAccount === index && (
@@ -372,7 +372,7 @@ export default function FAQ() {
                   alt="Toggle"
                   width={30}
                   height={30}
-                  className={activePeopleAsk === index ? styles.rotated : ''}
+                  className={activePeopleAsk === index ? styles.rotated : styles.chevron}
                 />
               </button>
               {activePeopleAsk === index && (
