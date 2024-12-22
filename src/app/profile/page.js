@@ -66,7 +66,7 @@ export default function Profile() {
               height={150}
               className={styles.profileImage}
             />
-            <div className={styles.editButton}>
+            <div className={styles.editButton} onClick={() => router.push('/edit-profile')}>
               <Image
                 src="/assets/icons/editButton.png"
                 alt="Edit"
