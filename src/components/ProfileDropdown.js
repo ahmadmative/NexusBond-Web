@@ -1,13 +1,17 @@
 "use client";
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import styles from './ProfileDropdown.module.css';
+import { getProfileDisplay } from '@/utils/profileImage';
+import { authService } from '@/api/services/auth.service';
+import UserAvatar from './UserAvatar';
 
 export default function ProfileDropdown({ onSignOut, userName }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const router = useRouter();
+  const currentUser = authService.getCurrentUser();
+  const profileDisplay = getProfileDisplay(currentUser);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -30,11 +34,26 @@ export default function ProfileDropdown({ onSignOut, userName }) {
     <div className={styles.dropdownContainer} ref={dropdownRef}>
       <div className={styles.profileHeader} onClick={() => setIsOpen(!isOpen)}>
         <div className={styles.userInfo}>
-          <img 
-            src="/assets/images/avatarHeader.png" 
-            alt="Profile" 
-            className={styles.profileImage}
-          />
+          {profileDisplay.isImage ? (
+            <Image 
+              src={profileDisplay.src}
+              alt="Profile"
+              width={30}
+              height={30}
+              className={styles.profileImage}
+              onError={(e) => {
+                e.target.onerror = null;
+                const user = authService.getCurrentUser();
+                user.about = null;
+                authService.setCurrentUser(user);
+              }}
+            />
+          ) : (
+            <UserAvatar 
+              name={userName}
+              size={30}
+            />
+          )}
           <span>Hello, {userName}</span>
         </div>
       </div>

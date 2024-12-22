@@ -1,0 +1,455 @@
+.main {
+  min-height: 100vh;
+  padding: 2rem 0;
+  background-color: #ffffff;
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #000000;
+}
+
+.highlight {
+  color: #99C5FF;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #333333;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.introSection {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.introContent {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  justify-content: space-between;
+}
+
+.textContent {
+  flex: 1;
+  max-width: 600px;
+}
+
+.textContent h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #000000;
+}
+
+.textContent p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #333333;
+}
+
+.imageContainer {
+  flex: 1;
+  max-width: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.introImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.introImage:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .introContent {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .textContent, 
+  .imageContainer {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+  }
+
+  .textContent h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .introSection {
+    padding: 2rem 1rem;
+  }
+}
+
+.missionSection {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+
+.missionContent {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+.missionContent .textContent {
+  flex: 1;
+  max-width: 600px;
+}
+
+.missionContent h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #000000;
+}
+
+.missionContent p {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #333333;
+}
+
+.missionContent .imageContainer {
+  flex: 1;
+  max-width: 500px;
+  position: relative;
+}
+
+.missionImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .missionContent {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .missionContent .textContent,
+  .missionContent .imageContainer {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .missionContent h2 {
+    font-size: 2rem;
+  }
+
+  .missionContent p {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .missionSection {
+    padding: 2rem 1rem;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+.main {
+  flex: 1 0 auto;
+  width: 100%;
+  padding-bottom: 4rem;
+}
+
+.missionContent {
+  flex-direction: row;
+}
+
+.offerSection {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.offerTitle {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #000000;
+}
+
+.tabsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tabItem {
+  border-bottom: 1px solid #eaeaea;
+}
+
+.tabButton {
+  width: 100%;
+  padding: 1.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #000000;
+  text-align: left;
+}
+
+.tabButton span {
+  flex: 1;
+}
+
+.tabButton img {
+  transition: transform 0.3s ease;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.tabContent {
+  padding: 1rem 0 2rem;
+  color: #666666;
+  line-height: 1.6;
+  font-size: 1.125rem;
+}
+
+.active {
+  color: #99C5FF;
+}
+
+@media (max-width: 1024px) {
+  .missionContent {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .offerTitle {
+    font-size: 2rem;
+  }
+
+  .tabButton {
+    font-size: 1.125rem;
+  }
+
+  .missionContent {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .offerSection {
+    padding: 2rem 1rem;
+  }
+
+  .tabContent {
+    font-size: 1rem;
+  }
+}
+
+.mobileApp {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+
+.mobileAppHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.mobileAppTitle {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #000000;
+}
+
+.mobileAppSubtitle {
+  font-size: 1.25rem;
+  color: #666666;
+  line-height: 1.6;
+}
+
+.mobileAppContent {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+}
+
+.mobileAppLeft {
+  flex: 1;
+  max-width: 500px;
+}
+
+.getStartedHeader {
+  margin-bottom: 2rem;
+}
+
+.getStartedHeader h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333333;
+}
+
+.logoImage {
+  height: auto;
+}
+
+.getStartedDescription {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #666666;
+  margin-bottom: 2rem;
+}
+
+.downloadOptions {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.storeButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.storeButton {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.storeButton:hover {
+  transform: scale(1.05);
+}
+
+.qrCode {
+  border-radius: 8px;
+}
+
+.mobileAppRight {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.phonesContainer {
+  position: relative;
+  max-width: 700px;
+}
+
+.phonePreview {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .mobileAppContent {
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
+
+  .mobileAppLeft {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .downloadOptions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobileAppTitle {
+    font-size: 2rem;
+  }
+
+  .mobileAppSubtitle {
+    font-size: 1.125rem;
+  }
+
+  .getStartedDescription {
+    font-size: 1rem;
+  }
+
+  .storeButtons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobileApp {
+    padding: 2rem 1rem;
+  }
+
+  .downloadOptions {
+    flex-direction: column;
+  }
+
+  .qrCode {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+

@@ -1,0 +1,191 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.title {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.highlight {
+  color: #99C5FF;
+}
+
+.subtitle {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+.contentWrapper {
+  display: flex;
+  gap: 4rem;
+  align-items: flex-start;
+}
+
+.contactInfo {
+  flex: 1;
+}
+
+.infoSection {
+  margin-bottom: 2.5rem;
+}
+
+.infoSection h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.infoSection p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.socialSection h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.5rem;
+}
+
+.socialIcons a {
+  color: #99C5FF;
+  transition: transform 0.3s ease;
+}
+
+.socialIcons a:hover {
+  transform: translateY(-3px);
+}
+
+.formSection {
+  flex: 1;
+}
+
+.formSection h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.inputWrapper {
+  flex: 1;
+  position: relative;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form textarea {
+  min-height: 200px;
+  resize: vertical;
+}
+
+.form input:focus,
+.form textarea:focus {
+  outline: none;
+  border-color: #99C5FF;
+}
+
+.error {
+  border-color: #ff4444 !important;
+}
+
+.errorText {
+  color: #ff4444;
+  font-size: 0.875rem;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+}
+
+.submitButton {
+  background-color: #99C5FF;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  align-self: flex-start;
+}
+
+.submitButton:hover {
+  transform: translateY(-2px);
+  background-color: #7ab5ff;
+}
+
+.successMessage {
+  color: #4CAF50;
+  text-align: center;
+  padding: 1rem;
+  background-color: #E8F5E9;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .contentWrapper {
+    flex-direction: column;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .formRow {
+    flex-direction: column;
+  }
+
+  .main {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .socialIcons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+} 

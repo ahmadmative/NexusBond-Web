@@ -184,6 +184,8 @@
   position: relative;
   width: 48px;
   height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .avatar {
@@ -191,6 +193,7 @@
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: top center;
 }
 
 .onlineIndicator {

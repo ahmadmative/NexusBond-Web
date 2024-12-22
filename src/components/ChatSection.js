@@ -7,6 +7,10 @@ export default function ChatSection({ selectedBot, messages, onSendMessage }) {
     const [newMessage, setNewMessage] = useState('');
     const messagesEndRef = useRef(null);
 
+    useEffect(() => {
+        setNewMessage('');
+    }, [selectedBot?.id]);
+
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -31,8 +35,13 @@ export default function ChatSection({ selectedBot, messages, onSendMessage }) {
         );
     }
 
+    // Sort messages by timestamp to ensure correct order
+    const sortedMessages = [...messages].sort((a, b) => 
+        new Date(a.timestamp) - new Date(b.timestamp)
+    );
+
     return (
-        <div className={styles.chatSection}>
+        <div className={styles.chatSection} key={selectedBot.id}>
             <div className={styles.chatHeader}>
                 <div className={styles.avatarContainer}>
                     <Image
@@ -41,6 +50,7 @@ export default function ChatSection({ selectedBot, messages, onSendMessage }) {
                         width={48}
                         height={48}
                         className={styles.avatar}
+                        style={{ objectFit: 'cover', objectPosition: 'top center' }}
                     />
                     {selectedBot.online && <div className={styles.onlineIndicator} />}
                 </div>
@@ -53,38 +63,17 @@ export default function ChatSection({ selectedBot, messages, onSendMessage }) {
             </div>
 
             <div className={styles.messageList}>
-                {messages.map((message) => (
+                {sortedMessages.map((message) => (
                     <div
                         key={message.id}
-                        className={`${styles.message} ${message.sender === 'user' ? styles.userMessage : styles.botMessage
-                            }`}>
+                        className={`${styles.message} ${message.sender === 'user' ? styles.userMessage : styles.botMessage}`}
+                    >
                         <div className={styles.messageContent}>
                             {message.content}
                             <div className={styles.messageActions}>
-                                <button>
-                                    <Image
-                                        src="/assets/icons/copy.png"
-                                        alt="Copy"
-                                        width={16}
-                                        height={16}
-                                    />
-                                </button>
-                                <button>
-                                    <Image
-                                        src="/assets/icons/share.png"
-                                        alt="Share"
-                                        width={16}
-                                        height={16}
-                                    />
-                                </button>
+                                {/* Message actions */}
                             </div>
                         </div>
-                        {/* <span className={styles.timestamp}>
-                            {new Date(message.timestamp).toLocaleTimeString([], {
-                                hour: '2-digit',
-                                minute: '2-digit'
-                            })}
-                        </span> */}
                     </div>
                 ))}
                 <div ref={messagesEndRef} />

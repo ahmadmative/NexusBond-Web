@@ -20,26 +20,19 @@ export default function Footer() {
       setIsAuthenticated(isAuth);
     };
 
-    // Initial check
     checkAuth();
-
-    // Listen for auth changes
     window.addEventListener('authStateChanged', checkAuth);
     
-    // Listen for storage changes (for multi-tab support)
-    window.addEventListener('storage', (e) => {
-      if (e.key === 'token' || e.key === 'user') {
-        checkAuth();
-      }
-    });
-
     return () => {
       window.removeEventListener('authStateChanged', checkAuth);
-      window.removeEventListener('storage', checkAuth);
     };
-  }, [pathname]);
+  }, []);
 
-  if (isAuthenticated) {
+  // Routes where footer should always be visible
+  const showFooterRoutes = ['/', '/about', '/pricing', '/contact'];
+  
+  // Show footer if it's in showFooterRoutes, otherwise hide if user is authenticated
+  if (!showFooterRoutes.includes(pathname) && isAuthenticated) {
     return null;
   }
 

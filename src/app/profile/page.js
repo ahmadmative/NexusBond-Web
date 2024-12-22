@@ -66,14 +66,14 @@ export default function Profile() {
               height={150}
               className={styles.profileImage}
             />
-            {/* <div className={styles.editButton}>
+            <div className={styles.editButton}>
               <Image
                 src="/assets/icons/editButton.png"
                 alt="Edit"
                 width={35}
                 height={35}
               />
-            </div> */}
+            </div>
           </div>
           <h2 className={styles.userName}>{user?.name || "User Name"}</h2>
         </div>
