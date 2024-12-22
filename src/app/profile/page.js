@@ -60,7 +60,7 @@ export default function Profile() {
         <div className={styles.profileInfo}>
           <div className={styles.profileImageContainer}>
             <Image
-              src={user?.profilePicture || "/assets/images/avatarHeader.png"}
+              src={user?.about || "/assets/images/avatarHeader.png"}
               alt="Profile"
               width={150}
               height={150}
