@@ -17,7 +17,7 @@ export default function Header() {
   const [loading, setLoading] = useState(true);
 
   // Add this array of routes where sign-out button should be hidden
-  const hideSignOutRoutes = ['/subscription', '/payment', '/identity-essence', '/character-vibe', '/login', '/register', '/visual-persona', '/your-character'];
+  const hideSignOutRoutes = ['/subscription', '/payment', '/identity-essence', '/character-vibe', '', '/dashboard', '/visual-persona', '/your-character'];
   
   // Add this helper function to check current route
   const shouldHideSignOut = hideSignOutRoutes.includes(pathname);
@@ -97,7 +97,7 @@ export default function Header() {
         ) : (
           <div className={styles.authButtonsContainer}>
             <Link href="/login" className={styles.loginButton}>
-              LOGIN
+              Login
             </Link>
             <Link href="/register" className={styles.registerNow}>
               Register Now

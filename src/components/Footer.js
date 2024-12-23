@@ -29,7 +29,24 @@ export default function Footer() {
   }, []);
 
   // Routes where footer should always be visible
-  const showFooterRoutes = ['/', '/about', '/pricing', '/contact'];
+  const showFooterRoutes = [
+    '/', 
+    '/about', 
+    '/pricing', 
+    '/contact', 
+    '/policies',
+    '/policies/dmca',
+    '/policies/privacy',
+    '/policies/terms',
+    '/policies/complaint',
+    '/policies/blocked-content',
+    '/policies/community-guidelines',
+    '/policies/content-removal',
+    '/policies/2257-exemption',
+    '/policies/underage',
+    '/policies/safety-center',
+    '/faq'
+  ];
   
   // Show footer if it's in showFooterRoutes, otherwise hide if user is authenticated
   if (!showFooterRoutes.includes(pathname) && isAuthenticated) {

@@ -38,8 +38,8 @@ export default function ProfileDropdown({ onSignOut, userName }) {
             <Image 
               src={profileDisplay.src}
               alt="Profile"
-              width={30}
-              height={30}
+              width={20}
+              height={20}
               className={styles.profileImage}
               onError={(e) => {
                 e.target.onerror = null;

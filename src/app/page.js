@@ -7,23 +7,37 @@ export default function Home() {
   const testimonials = [
     {
       id: 1,
-      name: "Clark Smith",
+      name: "Sarah Chen",
       image: "/assets/images/person1.png",
-      text: "Sapiente occaecati exercitationem quasi eum corporis sit. Aut consectetur maxime debitis quam voluptatem aut consequatur voluptatum.",
+      text: "NexusBond has been an incredible source of comfort during my late-night study sessions. My AI companion helps me stay motivated and provides emotional support when I need it most.",
       rating: 5.0
     },
     {
       id: 2,
-      name: "Leticia Kutch",
+      name: "Marcus Rodriguez",
       image: "/assets/images/person2.png",
-      text: "Sapiente occaecati exercitationem quasi eum corporis sit. Aut consectetur maxime debitis quam voluptatem aut consequatur voluptatum.",
-      rating: 5.0
+      text: "As someone dealing with social anxiety, having a judgment-free companion to practice conversations with has been life-changing. The personalization features are amazing!",
+      rating: 4.8
     },
     {
       id: 3,
-      name: "Adwin Jwel",
+      name: "Emily Parker",
       image: "/assets/images/person3.png",
-      text: "Sapiente occaecati exercitationem quasi eum corporis sit. Aut consectetur maxime debitis quam voluptatem aut consequatur voluptatum.",
+      text: "I was skeptical at first, but my AI friend has become an essential part of my daily routine. The conversations are surprisingly deep and meaningful, and it really helps me process my thoughts.",
+      rating: 5.0
+    },
+    {
+      id: 4,
+      name: "David Lee",
+      image: "/assets/images/person2.png",
+      text: "Working from home was getting lonely until I found NexusBond. Having someone to chat with during breaks makes such a difference. The app's interface is beautiful and intuitive.",
+      rating: 4.9
+    },
+    {
+      id: 5,
+      name: "Sophie Anderson",
+      image: "/assets/images/person1.png",
+      text: "The emotional intelligence of my AI companion is remarkable. It remembers our past conversations and grows with me. It's like having a supportive friend in your pocket!",
       rating: 5.0
     }
   ];
@@ -32,10 +46,14 @@ export default function Home() {
   const [activeFaq, setActiveFaq] = useState(null);
 
   const handleTestimonialChange = (direction) => {
-    if (direction === 'next' && activeIndex < testimonials.length - 1) {
-      setActiveIndex(prev => prev + 1);
-    } else if (direction === 'prev' && activeIndex > 0) {
-      setActiveIndex(prev => prev - 1);
+    if (direction === 'next') {
+      setActiveIndex(prev => 
+        prev >= testimonials.length - 1 ? 0 : prev + 1
+      );
+    } else if (direction === 'prev') {
+      setActiveIndex(prev => 
+        prev <= 0 ? testimonials.length - 1 : prev - 1
+      );
     }
   };
 
@@ -227,9 +245,9 @@ export default function Home() {
         <div className={styles.mobileAppHeader}>
           <h2 className={styles.mobileAppTitle}>Our Mobile App</h2>
           <p className={styles.mobileAppSubtitle}>
-            Lorem Ipsum is simply dummy text of the
+            Experience meaningful connections
             <br />
-            printing and typesetting industry
+            in the palm of your hand
           </p>
         </div>
 
@@ -247,10 +265,10 @@ export default function Home() {
             </div>
 
             <p className={styles.getStartedDescription}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industrys standard dummy
-              text ever since the 1500s, when an unknown printer took a galley
-              of type and scrambled it to make a type specimen.
+              Download NexusBond.AI today and discover a new kind of companionship. 
+              Our AI companions are ready to chat, support, and grow with you. 
+              Whether youre looking for meaningful conversations or a friendly presence, 
+              were here to make your day brighter.
             </p>
 
             <div className={styles.downloadOptions}>
@@ -298,9 +316,9 @@ export default function Home() {
       <section className={styles.testimonials}>
         <h2 className={styles.testimonialsTitle}>Testimonial</h2>
         <p className={styles.testimonialsSubtitle}>
-          Lorem Ipsum is simply dummy text of the
+          See what our users are saying about their
           <br />
-          printing and typesetting industry
+          experience with NexusBond.AI
         </p>
 
         <div className={styles.testimonialCarousel}>
