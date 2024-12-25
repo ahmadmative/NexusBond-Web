@@ -118,13 +118,13 @@ export default function MobileChat({ selectedBot, onBack }) {
                     aria-label="Go back"
                 >
                     <Image 
-                        src="/assets/icons/arrowback.png"
+                        src="/assets/icons/arrowBack.png"
                         alt="Back" 
                         width={24} 
                         height={24}
                         priority
                         onError={(e) => {
-                            e.target.src = '/assets/icons/arrowback.png';
+                            e.target.src = '/assets/icons/arrowBack.png';
                             console.log('Error loading back arrow image');
                         }}
                     />
