@@ -10,7 +10,8 @@ export default function Dropdown({
   icon,
   name,
   options = [],
-  required = false
+  required = false,
+  error
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -29,7 +30,7 @@ export default function Dropdown({
   return (
     <div className={styles.dropdownContainer} ref={dropdownRef}>
       <div 
-        className={`${styles.dropdownTrigger} ${icon ? styles.hasLeftIcon : ''}`}
+        className={`${styles.dropdownTrigger} ${icon ? styles.hasLeftIcon : ''} ${error ? styles.error : ''}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {icon && (
@@ -42,7 +43,7 @@ export default function Dropdown({
             />
           </div>
         )}
-        <div className={styles.selectedValue}>
+        <div className={`${styles.selectedValue} ${!value ? styles.placeholder : ''}`}>
           {value || placeholder}
         </div>
         <div className={styles.rightIcon}>
@@ -75,6 +76,7 @@ export default function Dropdown({
           ))}
         </div>
       )}
+      {error && <span className={styles.errorMessage}>{error}</span>}
     </div>
   );
 } 

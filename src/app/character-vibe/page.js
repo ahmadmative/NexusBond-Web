@@ -31,6 +31,7 @@ function CharacterVibeContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState({});
 
     // Get all previous data from URL params
     const previousData = {
@@ -71,8 +72,24 @@ function CharacterVibeContent() {
         });
     };
 
+    const validateForm = () => {
+        const newErrors = {};
+        Object.keys(formData).forEach(key => {
+            if (!formData[key]) {
+                newErrors[key] = 'This field is required';
+            }
+        });
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        if (!validateForm()) {
+            return;
+        }
+
         setLoading(true);
 
         try {
@@ -157,6 +174,7 @@ function CharacterVibeContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/communicationStyle.png"
                             options={hobbiesOptions}
+                            error={errors.hobbies}
                         />
 
                         <Dropdown
@@ -166,6 +184,7 @@ function CharacterVibeContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/communicationStyle.png"
                             options={communicationStyleOptions}
+                            error={errors.communicationStyle}
                         />
 
                         <Dropdown
@@ -175,6 +194,7 @@ function CharacterVibeContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/goals.png"
                             options={goalsOptions}
+                            error={errors.goals}
                         />
 
                         <Dropdown
@@ -184,6 +204,7 @@ function CharacterVibeContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/personalValues.png"
                             options={personalValuesOptions}
+                            error={errors.personalValues}
                         />
 
                         <Dropdown
@@ -193,6 +214,7 @@ function CharacterVibeContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/senseOfHumor.png"
                             options={senseOfHumorOptions}
+                            error={errors.senseOfHumor}
                         />
 
                         <Dropdown
@@ -202,6 +224,7 @@ function CharacterVibeContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/socialBehavior.png"
                             options={socialBehaviorOptions}
+                            error={errors.socialBehavior}
                         />
 
                         <Dropdown
@@ -211,6 +234,7 @@ function CharacterVibeContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/emotionalIntelligence.png"
                             options={emotionalIntelligenceOptions}
+                            error={errors.emotionalIntelligence}
                         />
 
                         <Dropdown
@@ -220,6 +244,7 @@ function CharacterVibeContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/communicationStyle.png"
                             options={reactionToConflictOptions}
+                            error={errors.reactionToConflict}
                         />
 
                         <Dropdown
@@ -229,6 +254,7 @@ function CharacterVibeContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/communicationStyle.png"
                             options={prefferedTopicOptions}
+                            error={errors.prefferedTopic}
                         />
                     </div>
 

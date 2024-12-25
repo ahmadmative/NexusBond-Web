@@ -45,6 +45,8 @@ function VisualPersonaContent() {
         background: ''
     });
 
+    const [errors, setErrors] = useState({});
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -52,9 +54,24 @@ function VisualPersonaContent() {
         });
     };
 
+    const validateForm = () => {
+        const newErrors = {};
+        Object.keys(formData).forEach(key => {
+            if (!formData[key]) {
+                newErrors[key] = 'This field is required';
+            }
+        });
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         
+        if (!validateForm()) {
+            return;
+        }
+
         // Combine both identity and visual data
         const combinedData = {
             ...identityData,
@@ -88,6 +105,7 @@ function VisualPersonaContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/hair.png"
                             options={hairColorOptions}
+                            error={errors.hairColor}
                         />
 
                         <Dropdown
@@ -97,6 +115,7 @@ function VisualPersonaContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/hair.png"
                             options={hairstyleOptions}
+                            error={errors.hairstyle}
                         />
 
                         <Dropdown
@@ -106,6 +125,7 @@ function VisualPersonaContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/eyes.png"
                             options={eyeColorOptions}
+                            error={errors.eyeColor}
                         />
 
                         <Dropdown
@@ -115,6 +135,7 @@ function VisualPersonaContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/eyes.png"
                             options={eyeShapeOptions}
+                            error={errors.eyeShape}
                         />
 
                         <Dropdown
@@ -124,6 +145,7 @@ function VisualPersonaContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/face.png"
                             options={skinToneOptions}
+                            error={errors.skinTone}
                         />
 
                         <Dropdown
@@ -133,6 +155,7 @@ function VisualPersonaContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/face.png"
                             options={bodyTypeOptions}
+                            error={errors.bodyType}
                         />
 
                         <Dropdown
@@ -142,6 +165,7 @@ function VisualPersonaContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/face.png"
                             options={heightOptions}
+                            error={errors.height}
                         />
 
                         <Dropdown
@@ -151,6 +175,7 @@ function VisualPersonaContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/hobbies.png"
                             options={fashionStyleOptions}
+                            error={errors.fashionStyle}
                         />
 
                         <Dropdown
@@ -160,6 +185,7 @@ function VisualPersonaContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/face.png"
                             options={facialExpressionOptions}
+                            error={errors.facialExpression}
                         />
 
                         <Dropdown
@@ -169,6 +195,7 @@ function VisualPersonaContent() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/nationality.png"
                             options={backgroundOptions}
+                            error={errors.background}
                         />
                     </div>
 

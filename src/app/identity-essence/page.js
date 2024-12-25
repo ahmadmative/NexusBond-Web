@@ -24,6 +24,7 @@ export default function IdentityEssence() {
         nationality: '',
         pronouns: '',
     });
+    const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
         setFormData({
@@ -32,8 +33,23 @@ export default function IdentityEssence() {
         });
     };
 
+    const validateForm = () => {
+        const newErrors = {};
+        Object.keys(formData).forEach(key => {
+            if (!formData[key]) {
+                newErrors[key] = 'This field is required';
+            }
+        });
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        
+        if (!validateForm()) {
+            return;
+        }
         
         // Convert formData to URL search params
         const searchParams = new URLSearchParams();
@@ -61,6 +77,7 @@ export default function IdentityEssence() {
                             value={formData.name}
                             onChange={handleChange}
                             icon="/assets/characterIcons/name.png"
+                            error={errors.name}
                         />
 
                         <Dropdown
@@ -70,6 +87,7 @@ export default function IdentityEssence() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/age.png"
                             options={ageOptions}
+                            error={errors.age}
                         />
 
                         <Dropdown
@@ -79,6 +97,7 @@ export default function IdentityEssence() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/name.png"
                             options={ethnicityOptions}
+                            error={errors.ethnicity}
                         />
 
                         <Dropdown
@@ -88,6 +107,7 @@ export default function IdentityEssence() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/gender.png"
                             options={genderOptions}
+                            error={errors.gender}
                         />
 
                         <Dropdown
@@ -97,6 +117,7 @@ export default function IdentityEssence() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/nationality.png"
                             options={nationalityOptions}
+                            error={errors.nationality}
                         />
 
                         <Dropdown
@@ -106,6 +127,7 @@ export default function IdentityEssence() {
                             onChange={handleChange}
                             icon="/assets/characterIcons/pronouns.png"
                             options={pronounOptions}
+                            error={errors.pronouns}
                         />
                     </div>
 

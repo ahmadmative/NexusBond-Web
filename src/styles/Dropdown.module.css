@@ -1,6 +1,7 @@
 .dropdownContainer {
   position: relative;
   width: 100%;
+  margin-bottom: 16px;
 }
 
 .dropdownTrigger {
@@ -21,6 +22,21 @@
 
 .dropdownTrigger:hover {
   border-color: var(--primary);
+}
+.error {
+  border: 1px solid #ff4d4f !important;
+  background-color: #fff2f0;
+}
+
+.errorMessage {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.placeholder {
+  color: #999;
 }
 
 .leftIcon {
