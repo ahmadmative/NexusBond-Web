@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '@/components/Sidebar';
 import ChatSection from '@/components/ChatSection';
+import MobileSidebar from '@/components/mobile/MobileSidebar';
+import MobileChat from '@/components/mobile/MobileChat';
 import styles from './home.module.css';
 import { authService } from '@/api/services/auth.service';
 import LoaderPopup from '@/components/LoaderPopup';
@@ -12,9 +14,25 @@ export default function Home() {
   const [messages, setMessages] = useState([]);
   const [chats, setChats] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [showMobileChat, setShowMobileChat] = useState(false);
 
   useEffect(() => {
     getChats();
+    
+    // Check if mobile on mount
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   useEffect(() => {
@@ -37,10 +55,8 @@ export default function Home() {
       });
       
       if (response.status === 200) {
-        console.log('Raw chat data:', response.data);
         
         const formattedChats = response.data.map(chat => {
-          console.log('chat in formattedChats', chat);
           const features = JSON.parse(chat.features);
           
           return {
@@ -54,11 +70,9 @@ export default function Home() {
           };
         });
         
-        console.log('Formatted chats:', formattedChats);
         setChats(formattedChats);
       }
     } catch(error) {
-      console.error('Error fetching chats:', error);
     } finally {
       setLoading(false);
     }
@@ -99,7 +113,6 @@ export default function Home() {
         setMessages(formattedMessages);
       }
     } catch(error) {
-      console.error('Error fetching messages:', error);
     } finally {
       setLoading(false);
     }
@@ -107,6 +120,11 @@ export default function Home() {
 
   const handleBotSelect = (bot) => {
     setSelectedBot(bot);
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleBackToList = () => {
+    setIsMobileMenuOpen(true);
   };
 
   const handleSendMessage = async (message) => {
@@ -139,7 +157,6 @@ export default function Home() {
       });
 
       if (response.status === 200) {
-        console.log("AI response:", response.data);
 
         const botResponse = {
           id: Math.round(Math.random() * 1000000),
@@ -151,24 +168,61 @@ export default function Home() {
         setMessages(prev => [...prev, botResponse]);
       }
     } catch (error) {
-      console.error('Error sending message:', error);
     }
   };
 
+  // Mobile specific handlers
+  const handleMobileBotSelect = (bot) => {
+    setSelectedBot(bot);
+    setShowMobileChat(true);
+    getMessages(bot.id);
+  };
+
+  const handleMobileBack = () => {
+    setShowMobileChat(false);
+    setSelectedBot(null);
+  };
+
+  // Render mobile or desktop version based on screen size
+  if (isMobile) {
+    return (
+      <div className={styles.mobileContainer}>
+        {!showMobileChat ? (
+          <MobileSidebar 
+            chats={chats}
+            onBotSelect={handleMobileBotSelect}
+            loading={loading}
+          />
+        ) : (
+          <MobileChat 
+            selectedBot={selectedBot}
+            messages={messages}
+            onSendMessage={handleSendMessage}
+            onBack={handleMobileBack}
+          />
+        )}
+        {loading && <LoaderPopup />}
+      </div>
+    );
+  }
+
+  // Desktop version
   return (
     <div className={styles.container}>
       <Sidebar 
         selectedBot={selectedBot}
-        onBotSelect={handleBotSelect}
+        onBotSelect={setSelectedBot}
         chats={chats}
         loading={loading}
       />
       <div className={styles.divider}/>
-      <ChatSection
-        selectedBot={selectedBot}
-        messages={messages}
-        onSendMessage={handleSendMessage}
-      />
+      <div className={styles.chatSection}>
+        <ChatSection
+          selectedBot={selectedBot}
+          messages={messages}
+          onSendMessage={handleSendMessage}
+        />
+      </div>
       {loading && <LoaderPopup />}
     </div>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Input from '@/components/Input';
@@ -11,34 +11,125 @@ import LoaderPopup from '@/components/LoaderPopup';
 
 export default function Login() {
   const router = useRouter();
+  const [isChecking, setIsChecking] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+    general: ''
+  });
+
+  // Check authentication status on component mount
+  useEffect(() => {
+    const checkAuth = () => {
+      if (authService.isAuthenticated()) {
+        router.push('/home');
+      } else {
+        setIsChecking(false);
+      }
+    };
+
+    checkAuth();
+    // Listen for auth state changes
+    window.addEventListener('authStateChanged', checkAuth);
+    
+    return () => {
+      window.removeEventListener('authStateChanged', checkAuth);
+    };
+  }, [router]);
+
+  // Don't render the login form while checking auth status
+  if (isChecking) {
+    return <LoaderPopup />;
+  }
+
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {
+      email: '',
+      password: '',
+      general: ''
+    };
+
+    // Email validation
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+      isValid = false;
+    }
+
+    // Password validation
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+      isValid = false;
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    // Clear error when user starts typing
+    setErrors(prev => ({
+      ...prev,
+      [name]: '',
+      general: ''
+    }));
   };
 
   const handleSubmit = async (e) => {
-    console.log('Form Data:', formData);
     e.preventDefault();
-    setError('');
+    setErrors({ email: '', password: '', general: '' });
+
+    if (!validateForm()) {
+      return;
+    }
+
     setLoading(true);
 
     try {
-      console.log('Attempting login...');
       const response = await authService.login(formData.email, formData.password);
       if (response.token && response.user) {
         router.push('/home');
       }
     } catch (error) {
-      console.error('Login error:', error);
-      setError(error.response?.data?.message || 'Failed to sign in');
+      
+      // Handle different types of errors
+      if (error.response?.status === 401) {
+        setErrors(prev => ({
+          ...prev,
+          general: 'Invalid email or password'
+        }));
+      } else if (error.response?.status === 403) {
+        setErrors(prev => ({
+          ...prev,
+          general: 'Your account has been locked. Please contact support.'
+        }));
+      } else if (error.response?.data?.message) {
+        setErrors(prev => ({
+          ...prev,
+          general: error.response.data.message
+        }));
+      } else {
+        setErrors(prev => ({
+          ...prev,
+          general: 'An error occurred. Please try again later.'
+        }));
+      }
     } finally {
       setLoading(false);
     }
@@ -49,7 +140,7 @@ export default function Login() {
       <div className={styles.loginForm}>
         <h1>Login</h1>
         <p className={styles.subtitle}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry
+          Welcome back! Please enter your email and password to login.
         </p>
 
         <form onSubmit={handleSubmit}>
@@ -61,9 +152,12 @@ export default function Login() {
               value={formData.email}
               onChange={handleChange}
               icon="/assets/icons/email.png"
+              error={errors.email}
               required
             />
+            {errors.email && <span className={styles.errorText}>{errors.email}</span>}
           </div>
+
           <div className={styles.inputGroup}>
             <Input
               type="password"
@@ -72,9 +166,17 @@ export default function Login() {
               value={formData.password}
               onChange={handleChange}
               icon="/assets/icons/lock.png"
+              error={errors.password}
               required
             />
+            {errors.password && <span className={styles.errorText}>{errors.password}</span>}
           </div>
+
+          {errors.general && (
+            <div className={styles.generalError}>
+              {errors.general}
+            </div>
+          )}
 
           <div className={styles.forgotPassword}>
             <Link href="/forgot-password">Forgot Password?</Link>

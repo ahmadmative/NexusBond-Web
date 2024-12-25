@@ -162,6 +162,20 @@
   margin-top: 1rem;
 }
 
+.submitButton.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.errorMessage {
+  color: #ff4444;
+  text-align: center;
+  padding: 1rem;
+  background-color: #ffe5e5;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
 @media (max-width: 1024px) {
   .contentWrapper {
     flex-direction: column;
@@ -170,22 +184,103 @@
 }
 
 @media (max-width: 768px) {
+  .main {
+    padding: calc(82px + 2rem) 1rem 2rem 1rem;
+  }
+
   .title {
     font-size: 2.5rem;
   }
 
-  .formRow {
-    flex-direction: column;
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
   }
 
-  .main {
-    padding: 2rem 1rem;
+  .contentWrapper {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contactInfo {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .formSection {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .formRow {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form {
+    gap: 2rem;
+  }
+
+  .inputWrapper {
+    margin-bottom: 0.5rem;
+  }
+
+  .form input,
+  .form textarea {
+    padding: 0.875rem;
+    font-size: 1rem;
+  }
+
+  .errorText {
+    bottom: -18px;
+  }
+
+  .submitButton {
+    width: 100%;
+    padding: 0.875rem;
+    align-self: center;
+  }
+
+  .socialSection {
+    text-align: center;
+  }
+
+  .socialIcons {
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  .infoSection {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .infoSection h2 {
+    font-size: 1.25rem;
+  }
+
+  .infoSection p {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .main {
+    padding-top: calc(82px + 1rem);
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
   .socialIcons {
     flex-wrap: wrap;
-    justify-content: center;
+    gap: 1.25rem;
+  }
+
+  .form textarea {
+    min-height: 150px;
   }
 } 

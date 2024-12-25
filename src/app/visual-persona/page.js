@@ -61,7 +61,6 @@ function VisualPersonaContent() {
             ...formData
         };
 
-        console.log('Combined Data:', combinedData);
 
         // Convert combined data to URL params
         const newSearchParams = new URLSearchParams();

@@ -138,7 +138,6 @@ function CharacterVibeContent() {
                 router.push(`/your-character?character=${encodeURIComponent(JSON.stringify(response.data))}`);
             }
         } catch (error) {
-            console.error('API Error:', error);
         } finally {
             setLoading(false);
         }

@@ -15,7 +15,6 @@ export async function POST(request) {
       }
     } catch (e) {
       // If no body is sent, use default amount
-      console.log('No amount specified, using default');
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
@@ -30,7 +29,6 @@ export async function POST(request) {
       clientSecret: paymentIntent.client_secret
     });
   } catch (err) {
-    console.error('Error creating payment intent:', err);
     return NextResponse.json(
       { error: 'Error creating payment intent' },
       { status: 500 }

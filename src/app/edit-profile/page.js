@@ -109,7 +109,6 @@ export default function EditProfile() {
                 }
             }
         } catch (error) {
-            console.error('Error loading user data:', error);
             toast.error('Error loading profile data');
             setImagePreview('/assets/images/avatarHeader.png');
         } finally {
@@ -159,7 +158,6 @@ export default function EditProfile() {
                 router.back();
             }
         } catch (error) {
-            console.error('Error updating profile:', error);
             toast.error(error.response?.data?.message || 'Failed to update profile');
         } finally {
             setLoading(false);
@@ -262,7 +260,8 @@ export default function EditProfile() {
                             onChange={handleChange}
                             icon="/assets/editProfile/email.png"
                             error={errors.email}
-                            disabled
+                            disabled={true}
+                            readOnly={true}
                         />
                     </div>
 

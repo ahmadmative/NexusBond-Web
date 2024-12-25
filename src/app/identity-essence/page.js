@@ -34,7 +34,6 @@ export default function IdentityEssence() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData); // For debugging
         
         // Convert formData to URL search params
         const searchParams = new URLSearchParams();

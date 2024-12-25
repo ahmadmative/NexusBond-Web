@@ -34,7 +34,7 @@
 }
 
 .inputGroup {
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 .divider {
@@ -114,4 +114,21 @@
     width: 48px;
     height: 48px;
   }
+}
+
+.errorText {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.generalError {
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  color: #ff4d4f;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  text-align: center;
 } 

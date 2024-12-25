@@ -1,52 +1,27 @@
-.header {
+/* Desktop Header Styles */
+.desktopHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 5%;
-  background: #F5F6FA;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  border-bottom: 1px solid #F0F0F0;
+  background: white;
+  border-bottom: 1px solid #eee;
 }
 
-.logoContainer {
-  cursor: pointer;
-  height: 60px;
-  width: 180px;
-}
-
-.nav {
-  flex: 1;
-  margin: 0 2rem;
-}
-
-.navList {
+.desktopNav ul {
   display: flex;
   list-style: none;
-  gap: 2rem;
-  justify-content: center;
+  gap: 2.5rem;
   margin: 0;
   padding: 0;
 }
 
-.navList li a {
+.desktopNav a {
   text-decoration: none;
   color: #333;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
   transition: color 0.3s ease;
-}
-
-.navList li a:hover {
-  color: #7CB9E8;
-}
-
-.features {
-  position: relative;
-}
-
-.arrow {
-  font-size: 0.8rem;
-  margin-left: 0.3rem;
 }
 
 .authButtons {
@@ -58,7 +33,7 @@
 .signIn {
   text-decoration: none;
   color: #333;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
   padding: 0.5rem 1rem;
 }
@@ -67,129 +42,152 @@
   text-decoration: none;
   background: #7CB9E8;
   color: white;
-  padding: 0.5rem 1.5rem;
-  border-radius: 5px;
-  font-size: 0.9rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
   font-weight: 500;
   transition: background-color 0.3s ease;
 }
 
-.registerNow:hover {
-  background: #5CA8E0;
-}
-
 .hamburger {
   display: none;
-  flex-direction: column;
-  gap: 6px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
 }
 
-.hamburger span {
+/* Mobile Menu Styles */
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100vh;
+  background: white;
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.mobileMenu.active {
+  left: 0;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.closeButton span {
   display: block;
-  width: 25px;
+  width: 100%;
   height: 2px;
   background: #333;
-  transition: all 0.3s ease;
+  position: absolute;
+  top: 50%;
+}
+
+.closeButton span:first-child {
+  transform: rotate(45deg);
+}
+
+.closeButton span:last-child {
+  transform: rotate(-45deg);
+}
+
+.mobileLogo {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.mobileUserProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.mobileNav ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.mobileNav li a {
+  display: block;
+  padding: 15px 0;
+  text-decoration: none;
+  color: #333;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.mobileAuthButtons {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobileSignIn {
+  width: 100%;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #7CB9E8;
+  border-radius: 8px;
+  color: #7CB9E8;
+  text-decoration: none;
+}
+
+.mobileRegister {
+  width: 100%;
+  padding: 12px;
+  text-align: center;
+  background: #7CB9E8;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.signOutButton {
+  margin-top: auto;
+  width: 100%;
+  padding: 12px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
-  }
-
-  .nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    padding: 1rem;
-    display: none;
-  }
-
-  .nav.active {
-    display: block;
-  }
-
-  .navList {
     flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
   }
 
+  .hamburger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: #333;
+    transition: all 0.3s ease;
+  }
+
+  .desktopNav, 
   .authButtons {
     display: none;
   }
-
-  .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
-  }
-
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-  }
-}
-
-.userProfile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-}
-
-.profileImageWrapper {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.profileImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 50%;
-}
-
-.signOut {
-  padding: 8px 16px;
-  color: #666;
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.2s;
-}
-
-.signOut:hover {
-  color: #333;
-}
-
-.authButtonsContainer {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.loginButton {
-  text-decoration: none;
-  background: #7CB9E8;
-  color: white;
-  padding: 0.5rem 1.5rem;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
-}
-
-.loginButton:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
 } 

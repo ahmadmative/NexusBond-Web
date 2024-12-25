@@ -1,20 +1,21 @@
 .sidebar {
   width: 360px;
-  height: 80vh;
+  min-width: 360px;
+  height: 100%;
   background: #F5F6FA;
   display: flex;
   flex-direction: column;
   border-right: 1px solid #F0F0F0;
-  padding-top: 20px;
-  border-bottom: 1px solid #F0F0F0;
 }
 
 .searchContainer {
   padding: 16px;
   display: flex;
   gap: 12px;
-  /* background: #F8F9FE; */
+  background: #F5F6FA;
   border-bottom: 1px solid #F0F0F0;
+  position: sticky;
+  top: 0;
 }
 
 .searchBar {
@@ -25,7 +26,7 @@
   padding: 12px 16px;
   background: #fff;
   border-radius: 12px;
-  border: 1px solid #b0b0b0;
+  border: 1px solid #e5e7eb;
 }
 
 .searchBar input {
@@ -35,25 +36,13 @@
   outline: none;
   font-size: 14px;
   color: #1F2937;
-  font-family: 'Poppins', sans-serif;
 }
 
 .actions {
   display: flex;
-  gap: 8px;
+  align-items: center;
 }
 
-.filterButton {
-  width: 44px;
-  height: 44px;
-  border: none;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
 .addButton {
   width: 40px;
   height: 40px;
@@ -63,16 +52,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.filterButton {
-  background: white;
-  border: 1px solid #b0b0b0;
-}
-
-.addButton {
   background: #93C4F1;
+  transition: all 0.2s ease;
 }
 
 .addButton img {
@@ -82,7 +63,7 @@
 .botList {
   flex: 1;
   overflow-y: auto;
-  background: F5F6FA;
+  background: #F5F6FA;
 }
 
 .botItem {
@@ -97,7 +78,7 @@
 }
 
 .botItem:hover {
-  background: #F8F9FE;
+  background: #EBF1FA;
 }
 
 .botItem.selected {
@@ -106,7 +87,7 @@
 
 .avatarContainer {
   position: relative;
-  width: 48px;
+  min-width: 48px;
   height: 48px;
 }
 
@@ -115,18 +96,7 @@
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
-    object-position: top center;
-}
-
-.onlineIndicator {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  width: 10px;
-  height: 10px;
-  background: #02EC34;
-  border: 1px solid white;
-  border-radius: 50%;
+  object-position: top center;
 }
 
 .botInfo {
@@ -142,17 +112,19 @@
 }
 
 .nameRow h3 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: #1F2937;
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .timestamp {
   font-size: 12px;
   color: #6B7280;
-  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
 }
 
 .lastMessage {
@@ -162,19 +134,77 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-family: 'Poppins', sans-serif;
 }
 
-.unreadCount {
-  background: #22C55E;
-  color: white;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
+/* Hide close button by default (web) */
+.closeButton {
+  display: none;
+}
+
+.inlineAddButton {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  margin-left: 8px;
-  font-family: 'Poppins', sans-serif;
-} 
+  cursor: pointer;
+  background: #93C4F1;
+  transition: all 0.2s ease;
+}
+
+.inlineAddButton img {
+  filter: brightness(0) invert(1);
+}
+
+.inlineAddButton:hover {
+  opacity: 0.9;
+}
+
+.inlineAddButton:active {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    top: 70px;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: white;
+    z-index: 998;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .searchContainer {
+    position: sticky;
+    top: 0;
+    padding: 16px;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .botList {
+    padding: 0;
+    background: white;
+    overflow-y: auto;
+    height: calc(100% - 80px);
+  }
+
+  .botItem {
+    padding: 16px;
+    background: white;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  /* Remove close button since we're using back button */
+  .closeButton {
+    display: none;
+  }
+}

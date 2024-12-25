@@ -13,32 +13,38 @@ export const authService = {
                 window.localStorage.setItem('AUTH_TOKEN_BACKEND', response.data.token);
                 window.localStorage.setItem('USER', JSON.stringify(response.data.user));
                 window.dispatchEvent(new Event('authStateChanged'));
+                // Check subscription status
+                const user = response.data.user;
+                if (!user.subscribedTo || user.subscribedTo === "No subscription found" || !user.subscribedTo.id) {
+                    window.location.href = '/subscriptionHome';
+                } else {
+                    window.location.href = '/home';
+                }
             }
             return response.data;
         } catch (error) {
-            console.error('Login error:', error);
+
             throw error;
         }
     },
 
-    register: async (email, password, fullName) => {
+    register: async (userData) => {
         try {
             const formData = new FormData();
-            formData.append('name', fullName);
-            formData.append('email', email);
-            formData.append('password', password);
+            formData.append('name', userData.name);
+            formData.append('email', userData.email);
+            formData.append('password', userData.password);
 
             const response = await axiosAuthInstance.post('/api/register', formData);
             if (response.data.token) {
-                console.log(response.data.token);
-                console.log(response.data.user);
                 window.localStorage.setItem('AUTH_TOKEN_BACKEND', response.data.token);
                 window.localStorage.setItem('USER', JSON.stringify(response.data.user));
+                window.dispatchEvent(new Event('authStateChanged'));
             }
             
             return response.data;
         } catch (error) {
-            console.error('Login error:', error);
+
             throw error;
         }
     },
@@ -69,5 +75,46 @@ export const authService = {
 
     setCurrentUser: (user) => {
         window.localStorage.setItem('USER', JSON.stringify(user));
+    },
+
+    sendOTP: async (email) => {
+        try {
+            const formData = new FormData();
+            formData.append('email', email);
+
+            const response = await axiosAuthInstance.post('/api/send-otp', formData);
+            return response.data;
+        } catch (error) {
+
+            throw error;
+        }
+    },
+
+    changePassword: async (email, password) => {
+        try {
+            const formData = new FormData();
+            formData.append('email', email);
+            formData.append('password', password);
+
+            const response = await axiosAuthInstance.post('/api/change-password', formData);
+            return response.data;
+        } catch (error) {
+
+            throw error;
+        }
+    },
+
+    makeRequest: async (method, endpoint, data = null) => {
+        try {
+            const response = await axiosAuthInstance({
+                method,
+                url: `/api${endpoint}`,
+                data
+            });
+            return response;
+        } catch (error) {
+
+            throw error;
+        }
     }
 }; 

@@ -105,6 +105,33 @@
   .textContent h2 {
     font-size: 2rem;
   }
+
+  .introContent,
+  .missionContent {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .introContent .imageContainer {
+    order: -1;
+  }
+
+  .missionContent {
+    flex-direction: column;
+  }
+
+  .missionContent .imageContainer {
+    order: -1;
+  }
+
+  .mobileAppContent {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .mobileAppRight {
+    order: -1;
+  }
 }
 
 @media (max-width: 480px) {
@@ -449,6 +476,92 @@
   .qrCode {
     width: 80px;
     height: 80px;
+  }
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 5%;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding-top: calc(82px + 2rem); /* Account for fixed header height + desired spacing */
+  }
+
+  .hero {
+    text-align: center;
+  }
+
+  .introContent,
+  .missionContent {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .textContent,
+  .imageContainer {
+    width: 100%;
+  }
+
+  .introImage,
+  .missionImage,
+  .phonePreview {
+    width: 100%;
+    height: auto;
+  }
+
+  .mobileAppContent {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .mobileAppLeft,
+  .mobileAppRight {
+    width: 100%;
+  }
+
+  .downloadOptions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .storeButtons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .qrCode {
+    margin-top: 2rem;
+  }
+}
+
+/* Add these styles for better tablet support */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main {
+    padding: 2rem 3%;
+  }
+
+  .introContent,
+  .missionContent {
+    gap: 2rem;
+  }
+
+  .mobileAppContent {
+    gap: 2rem;
+  }
+
+  .introImage,
+  .missionImage {
+    width: 100%;
+    height: auto;
   }
 }
 

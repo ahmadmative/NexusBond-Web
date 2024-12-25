@@ -45,7 +45,7 @@ export default function ChatSection({ selectedBot, messages, onSendMessage }) {
             <div className={styles.chatHeader}>
                 <div className={styles.avatarContainer}>
                     <Image
-                        src={selectedBot.profilePicture}
+                        src={selectedBot.profile_picture}
                         alt={selectedBot.name}
                         width={48}
                         height={48}

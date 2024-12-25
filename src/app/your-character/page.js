@@ -21,7 +21,6 @@ function YourCharacterContent() {
                 setCharacter(decodedCharacter);
             }
         } catch (error) {
-            console.error('Error parsing character data:', error);
         }
     }, [searchParams]);
 

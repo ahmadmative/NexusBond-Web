@@ -1,12 +1,12 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import styles from '../styles/Sidebar.module.css';
+import styles from './MobileSidebar.module.css';
 import { useRouter } from 'next/navigation';
 import { authService } from '@/api/services/auth.service';
 import SubscriptionAlert from '@/components/SubscriptionAlert';
 
-export default function Sidebar({ selectedBot, onBotSelect, user }) {
+export default function MobileSidebar({ onBotSelect, user }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [chats, setChats] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -163,9 +163,10 @@ export default function Sidebar({ selectedBot, onBotSelect, user }) {
                     />
                 </div>
                 <button 
-                    className={styles.inlineAddButton} 
+                    className={styles.addButton} 
                     onClick={handleCreateBot}
                     disabled={isCreating}
+                    type="button"
                 >
                     {isCreating ? (
                         <span></span>
@@ -187,7 +188,7 @@ export default function Sidebar({ selectedBot, onBotSelect, user }) {
                     filteredChats?.map((bot, index) => (
                         <div 
                             key={bot.id} 
-                            className={`${styles.botItem} ${selectedBot?.id === bot.id ? styles.selected : ''}`}
+                            className={`${styles.botItem}`}
                             onClick={async () => {
                                 const hasAccess = await checkBotAccess(bot, index);
                                 if (hasAccess) {
@@ -235,4 +236,4 @@ export default function Sidebar({ selectedBot, onBotSelect, user }) {
             )}
         </div>
     );
-} 
+}

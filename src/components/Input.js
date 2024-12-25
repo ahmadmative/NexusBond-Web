@@ -10,7 +10,10 @@ export default function Input({
   onChange,
   icon,
   name,
-  required = false
+  required = false,
+  error,
+  disabled,
+  readOnly
 }) {
   const [showPassword, setShowPassword] = useState(false);
   const [inputType, setInputType] = useState(type);
@@ -39,7 +42,9 @@ export default function Input({
         onChange={onChange}
         name={name}
         required={required}
-        className={`${styles.input} ${icon ? styles.hasLeftIcon : ''} ${type === 'password' ? styles.hasRightIcon : ''}`}
+        className={`${styles.input} ${icon ? styles.hasLeftIcon : ''} ${type === 'password' ? styles.hasRightIcon : ''} ${error ? styles.error : ''} ${disabled ? styles.disabled : ''}`}
+        disabled={disabled}
+        readOnly={readOnly}
       />
       {type === 'password' && (
         <button 
@@ -55,6 +60,7 @@ export default function Input({
           />
         </button>
       )}
+      {error && <span className={styles.errorText}>{error}</span>}
     </div>
   );
 }

@@ -5,103 +5,118 @@ import Image from 'next/image';
 import styles from './subscription.module.css';
 import LoaderPopup from '@/components/LoaderPopup';
 import { authService } from '@/api/services/auth.service';
-import axios from 'axios';
 
-// Create a component for the subscription content
 function SubscriptionContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [selectedPlan, setSelectedPlan] = useState(null);
   const [loading, setLoading] = useState(false);
   const [plans, setPlans] = useState([]);
-  const [currentUserPlan, setCurrentUserPlan] = useState(null);
 
   // Get registration data from URL params
   const email = searchParams.get('email');
   const name = searchParams.get('name');
 
   useEffect(() => {
-    const user = authService.getCurrentUser();
-    console.log("user", user);
-    if(user?.subscribedTo === 'No subscription found'){
-      setCurrentUserPlan('basic');
-    }else{
-      setCurrentUserPlan(user?.subscribedTo?.plan?.name?.toLowerCase());
-    }
     getPlans();
   }, []);
 
   const getPlans = async () => {
     setLoading(true);
     try {       
-        const token = authService.getAccessToken();
-        const response = await axios({
-            method: 'get',
-            url: 'https://application.nexusbond.ai/api/get-plans',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
-        });
-
-        if (response.status === 200) {
-          console.log('plans', response.data.plans);
-            const transformedPlans = response.data.plans.map(plan => ({
-                id: plan.id,
-                name: `${plan.name} Plan`,
-                price: parseInt(plan.price),
-                type: plan.name === 'Gold' ? 'Most Popular' : 
-                      plan.name === 'Silver' ? 'Medium' : 'Normal',
-                features: [
-                    `${plan.no_of_chats} Chat`,
-                ]
-            }));
-            setPlans(transformedPlans);
-        }
+        const plans = [
+          {
+            id: '1',
+            name: 'Free Plan',
+            price: 0.00,
+            messages: '50',
+            characters: '1',
+            features: [
+              '50 messages/month',
+              '1 Character',
+              'Messages deleted after 7 days of inactivity'
+            ]
+          },
+          {
+            id: '2',
+            name: 'Standard Plan',
+            price: 9.99,
+            messages: '1000',
+            characters: '2',
+            features: [
+              '1000 messages/month',
+              '2 Character',
+              'Dedicated chat capacity with basic priority'
+            ]
+          },
+          {
+            id: '3',
+            name: 'Premium Plan',
+            price: 15.99,
+            messages: '4000',
+            characters: '4',
+            features: [
+              '4000 messages/month',
+              '4 Character',
+              'Dedicated chat capacity with basic priority'
+            ]
+          },
+          {
+            id: '4',
+            name: 'Deluxe Plan',
+            price: 19.99,
+            messages: 'Unlimited',
+            characters: '6',
+            features: [
+              'Unlimited messages/month',
+              '6 Character',
+              'Dedicated chat capacity with basic priority'
+            ]
+          }
+        ];
+        setPlans(plans);
         setLoading(false);
     } catch (error) {
-        console.error(error);
         setLoading(false);
     }
   };
 
   const handleBuyNow = (plan) => {
-    console.log(plan);
-    setSelectedPlan(plan);
-    router.push(`/payment?email=${email}&name=${name}&planId=${plan.id}&planName=${plan.name}&planPrice=${plan.price}`);
+    const queryParams = new URLSearchParams({
+      email: email,
+      name: name,
+      planId: plan.id,
+      planName: plan.name,
+      planPrice: plan.price,
+      messages: plan.messages,
+      characters: plan.characters,
+      features: JSON.stringify(plan.features),
+      period: 'Month'
+    }).toString();
+    
+    router.push(`/payment?${queryParams}`);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>Subscription</h1>
+        <br />
+        <br />
+        <h1>Subscription Plans</h1>
+        <p>At NexusBond.AI, we are dedicated to providing top-notch AI chatbot services and personalized support to help you succeed. Reach out to us, and lets unlock the full potential of AI together.</p>
       </div>
 
       <div className={styles.plansContainer}>
         {plans.map((plan) => (
           <div 
             key={plan.id} 
-            className={`${styles.planCard} 
-              ${plan.id === 'gold' ? styles.popular : ''} 
-              ${(plan.id === currentUserPlan || 
-                (currentUserPlan === 'basic' && plan.name.toLowerCase().includes('basic'))) 
-                ? styles.activePlan : ''}`}
+            className={styles.planCard}
           >
-            {(plan.id === currentUserPlan || 
-              (currentUserPlan === 'basic' && plan.name.toLowerCase().includes('basic'))) && (
-              <div className={styles.activeLabel}>
-                {currentUserPlan === 'basic' && plan.name.toLowerCase().includes('basic') 
-                  ? 'Recommended Plan' 
-                  : 'Active Plan'}
-              </div>
-            )}
             <h2>{plan.name}</h2>
             <div className={styles.price}>
               <span className={styles.dollar}>$</span>
               <span className={styles.amount}>{plan.price}</span>
               <span className={styles.period}>/Month</span>
             </div>
-            <span className={styles.type}>{plan.type}</span>
 
             <div className={styles.features}>
               <h3>You Get</h3>
@@ -122,7 +137,7 @@ function SubscriptionContent() {
               className={styles.buyButton}
               onClick={() => handleBuyNow(plan)}
             >
-              Buy Now
+              Select Plan
             </button>
           </div>
         ))}
@@ -133,7 +148,6 @@ function SubscriptionContent() {
   );
 }
 
-// Main component with Suspense wrapper
 export default function Subscription() {
   return (
     <Suspense fallback={<LoaderPopup />}>

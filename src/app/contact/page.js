@@ -14,6 +14,7 @@ export default function Contact() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateForm = () => {
     const newErrors = {};
@@ -30,15 +31,35 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Dummy submission
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
+      setIsLoading(true);
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to send message');
+        }
+
+        setIsSubmitted(true);
         setFormData({ name: '', email: '', subject: '', message: '' });
-      }, 3000);
+        
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 3000);
+      } catch (error) {
+        setErrors({ submit: 'Failed to send message. Please try again.' });
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -164,12 +185,23 @@ export default function Contact() {
                 />
                 {errors.message && <span className={styles.errorText}>{errors.message}</span>}
               </div>
-              <button type="submit" className={styles.submitButton}>
-                Send Message
+              <button 
+                type="submit" 
+                className={`${styles.submitButton} ${isLoading ? styles.loading : ''}`}
+                disabled={isLoading}
+              >
+                {isLoading ? 'Sending...' : 'Send Message'}
               </button>
+              
+              {errors.submit && (
+                <div className={styles.errorMessage}>
+                  {errors.submit}
+                </div>
+              )}
+              
               {isSubmitted && (
                 <div className={styles.successMessage}>
-                  Form submitted successfully!
+                  Message sent successfully!
                 </div>
               )}
             </form>

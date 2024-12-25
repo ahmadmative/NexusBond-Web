@@ -118,6 +118,18 @@ export default function About() {
           </div>
 
           <div className={styles.mobileAppContent}>
+          <div className={styles.mobileAppRight}>
+              <div className={styles.phonesContainer}>
+                <Image
+                  src="/assets/images/phone1.png"
+                  alt="Mobile App Preview"
+                  width={700}
+                  height={500}
+                  className={styles.phonePreview}
+                  priority
+                />
+              </div>
+            </div>
             <div className={styles.mobileAppLeft}>
               <div className={styles.getStartedHeader}>
                 <h3>Get Started with</h3>
@@ -165,18 +177,7 @@ export default function About() {
               </div>
             </div>
 
-            <div className={styles.mobileAppRight}>
-              <div className={styles.phonesContainer}>
-                <Image
-                  src="/assets/images/phone1.png"
-                  alt="Mobile App Preview"
-                  width={700}
-                  height={500}
-                  className={styles.phonePreview}
-                  priority
-                />
-              </div>
-            </div>
+           
           </div>
         </section>
       </main>
