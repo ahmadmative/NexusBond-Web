@@ -6,34 +6,43 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: #F5F6FA;
-    overflow: hidden;
-    padding-top: 20%;
+    background: #fff;
+    z-index: 1000;
 }
 
 .header {
-    position: absolute;
-    top: 9.3%;
-    left: 0;
-    right: 0;
+    position: sticky;
+    top: 0;
     display: flex;
     align-items: center;
-    padding: 8px 16px;
-    background: #F5F6FA;
+    padding: 1rem;
+    background: #fff;
     border-bottom: 1px solid #e5e7eb;
     z-index: 10;
-    height: 56px;
+    gap: 1rem;
 }
 
 .backButton {
-    background: none;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.backButton:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.backButton img {
+    width: 24px;
+    height: 24px;
+    display: block;
 }
 
 .botInfo {

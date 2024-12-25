@@ -14,13 +14,17 @@ export default function Register() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    isAdult: false,
+    acceptedTerms: false
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({
     name: '',
     email: '',
     password: '',
+    isAdult: '',
+    acceptedTerms: '',
     general: ''
   });
 
@@ -47,6 +51,8 @@ export default function Register() {
       name: '',
       email: '',
       password: '',
+      isAdult: '',
+      acceptedTerms: '',
       general: ''
     };
 
@@ -74,17 +80,29 @@ export default function Register() {
       isValid = false;
     }
 
+    // New checkbox validations
+    if (!formData.isAdult) {
+      newErrors.isAdult = 'You must be 18 or older to register';
+      isValid = false;
+    }
+
+    if (!formData.acceptedTerms) {
+      newErrors.acceptedTerms = 'You must accept the Terms and Privacy Policy';
+      isValid = false;
+    }
+
     setErrors(newErrors);
     return isValid;
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
-    // Clear error when user starts typing
+    
+    // Clear error when user interacts
     setErrors(prev => ({
       ...prev,
       [name]: '',
@@ -94,7 +112,7 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors({ name: '', email: '', password: '', general: '' });
+    setErrors({ name: '', email: '', password: '', isAdult: '', acceptedTerms: '', general: '' });
 
     if (!validateForm()) {
       return;
@@ -188,6 +206,37 @@ export default function Register() {
               error={errors.password}
               required
             />
+          </div>
+
+          <div className={styles.checkboxGroup}>
+            <label className={styles.checkboxLabel}>
+              <input
+                type="checkbox"
+                name="isAdult"
+                checked={formData.isAdult}
+                onChange={handleChange}
+                className={styles.checkbox}
+              />
+              <span>I confirm that I am 18 years or older</span>
+              <Link href="/policies/underage" className={styles.policyLink}>Underage Policy
+              </Link>
+            </label>
+            {errors.isAdult && <span className={styles.errorText}>{errors.isAdult}</span>}
+          </div>
+
+          <div className={styles.checkboxGroup}>
+            <label className={styles.checkboxLabel}>
+              <input
+                type="checkbox"
+                name="acceptedTerms"
+                checked={formData.acceptedTerms}
+                onChange={handleChange}
+                className={styles.checkbox}
+              />
+              <span>I have read and agree to the</span>
+              <Link href="/policies/privacy" className={styles.policyLink}>Privacy Policy</Link>
+            </label>
+            {errors.acceptedTerms && <span className={styles.errorText}>{errors.acceptedTerms}</span>}
           </div>
 
           {errors.general && (

@@ -9,7 +9,7 @@
 
 .registerForm {
   width: 100%;
-  max-width: 440px;
+  max-width: 540px;
   padding: 2.5rem;
   background: white;
   border-radius: 24px;
@@ -131,4 +131,62 @@
   border-radius: 4px;
   margin-bottom: 16px;
   text-align: center;
+}
+
+.checkboxGroup {
+  margin-bottom: 16px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--textGrey);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.checkbox {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--borderLight);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.checkbox:checked {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.policyLink {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.policyLink:hover {
+  text-decoration: underline;
+}
+
+.errorText {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-left: 24px;
+  display: block;
+}
+
+/* Adjust spacing for mobile */
+@media (max-width: 480px) {
+  .checkboxLabel {
+    font-size: 13px;
+  }
+  
+  .checkboxGroup {
+    margin-bottom: 12px;
+  }
 } 

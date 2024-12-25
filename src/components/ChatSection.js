@@ -30,7 +30,7 @@ export default function ChatSection({ selectedBot, messages, onSendMessage }) {
     if (!selectedBot) {
         return (
             <div className={styles.emptyChatSection}>
-                <p>Select a bot to start chatting</p>
+                <p>Select a character to start chatting</p>
             </div>
         );
     }

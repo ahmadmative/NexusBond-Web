@@ -112,18 +112,27 @@ export default function MobileChat({ selectedBot, onBack }) {
     return (
         <div className={styles.mobileChat}>
             <div className={styles.header}>
-                <button className={styles.backButton} onClick={onBack}>
+                <button 
+                    className={styles.backButton} 
+                    onClick={onBack}
+                    aria-label="Go back"
+                >
                     <Image 
                         src="/assets/icons/arrowback.png"
                         alt="Back" 
                         width={24} 
-                        height={24} 
+                        height={24}
+                        priority
+                        onError={(e) => {
+                            e.target.src = '/assets/icons/arrowback.png';
+                            console.log('Error loading back arrow image');
+                        }}
                     />
                 </button>
                 <div className={styles.botInfo}>
                     <div className={styles.avatarContainer}>
                         <Image
-                            src={selectedBot.profile_picture || '/default-avatar.png'}
+                            src={selectedBot.profile_picture || '/assets/images/avatar.png'}
                             alt={selectedBot.name}
                             fill
                             className={styles.avatar}

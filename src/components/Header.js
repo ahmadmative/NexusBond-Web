@@ -126,7 +126,7 @@ export default function Header() {
         {isAuthenticated ? (
           <div className={styles.mobileUserProfile} onClick={() => setIsOpen(false)}>
             <Image 
-              src={currentUser?.about} 
+              src={currentUser?.about || '/assets/images/avatar.png'} 
               alt="" 
               width={60} 
               height={60} 
