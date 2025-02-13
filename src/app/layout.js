@@ -18,7 +18,7 @@ export const metadata = {
         sizes: "any",
       },
       {
-        url: "//assets/images/logo.png",
+        url: "/assets/images/logo.png",
         type: "image/png",
         sizes: "32x32",
       },

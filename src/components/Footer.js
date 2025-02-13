@@ -148,6 +148,7 @@ export default function Footer() {
           <Link href="/policies/2257-exemption">18 USC 2257 Exemption</Link>
           <Link href="/policies/underage">Underage Policy</Link>
           <Link href="/policies/safety-center">Safety Center</Link>
+          <Link href="/policies/eula">End User License Agreement</Link>
         </div>
 
         <div className={styles.copyright}>
