@@ -127,9 +127,10 @@ export default function Home() {
       <section className={styles.features}>
         <h2 className={styles.featuresTitle}>App Features</h2>
         <p className={styles.featuresSubtitle}>
-          Lorem Ipsum is simply dummy text of the
+        Feel Connected Anytime, Anywhere
           <br />
-          printing and typesetting industry
+          With NexusBond.AI, create a friend who truly
+            understands and complements you.
         </p>
 
         <div className={styles.featuresList}>
