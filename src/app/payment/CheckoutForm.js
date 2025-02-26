@@ -64,13 +64,14 @@ function CheckoutFormContent({ email: initialEmail, name, planId, planName, plan
   useEffect(() => {
     const createPaymentIntent = async () => {
       if (planData.planPrice > 0) {
+        
         const response = await fetch("/api/stripe/create-payment-intent", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            amount: planData.planPrice * 100,
+            amount: Math.round(planData.planPrice * 100)
           }),
         });
         const data = await response.json();

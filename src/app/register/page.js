@@ -123,7 +123,13 @@ export default function Register() {
     try {
       const response = await authService.register(formData);
       if (response.token && response.user) {
-        router.push('/subscription');
+        // Create URL with search params
+        const searchParams = new URLSearchParams({
+          email: formData.email,
+          name: formData.name
+        });
+        
+        router.push(`/subscription?${searchParams.toString()}`);
       }
     } catch (error) {
       

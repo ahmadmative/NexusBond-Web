@@ -35,13 +35,27 @@ function CheckoutFormContent({ email: initialEmail, name, planId, planName, plan
   const router = useRouter();
   const searchParams = useSearchParams();
   
-  // Get data from URL parameters
-  const [email, setEmail] = useState(initialEmail || searchParams.get('email') || "");
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    // Get email from localStorage USER object
+    const userStr = localStorage.getItem('USER');
+    if (userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        setUserEmail(user.email || '');
+      } catch (error) {
+        console.error('Error parsing USER from localStorage:', error);
+      }
+    }
+  }, []);
+
+  const [email, setEmail] = useState(initialEmail || searchParams.get('email') || userEmail || "");
   const [planData, setPlanData] = useState({
     name: name || searchParams.get('name'),
     planId: planId || searchParams.get('planId'),
     planName: planName || searchParams.get('planName'),
-    planPrice: planPrice || Number(searchParams.get('planPrice')),
+    planPrice: Number((planPrice || Number(searchParams.get('planPrice'))).toFixed(2)),
     messages: messages || searchParams.get('messages'),
     characters: characters || searchParams.get('characters'),
     features: features || searchParams.get('features'),
@@ -68,18 +82,32 @@ function CheckoutFormContent({ email: initialEmail, name, planId, planName, plan
   // Only fetch client secret if it's a paid plan
   useEffect(() => {
     const createPaymentIntent = async () => {
-      if (planData.planPrice > 0) {  // Only create payment intent for paid plans
-        const response = await fetch("/api/stripe/create-payment-intent", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            amount: planData.planPrice * 100, // convert to cents
-          }),
-        });
-        const data = await response.json();
-        setClientSecret(data.clientSecret);
+      if (planData.planPrice > 0) {
+        try {
+          const roundedAmount = Math.round(planData.planPrice * 100); // Convert to cents and round
+          const token = authService.getAccessToken();
+          
+          const response = await fetch("/api/stripe/create-payment-intent", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              amount: roundedAmount,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to create payment intent');
+          }
+
+          const data = await response.json();
+          setClientSecret(data.clientSecret);
+        } catch (error) {
+          console.error('Error creating payment intent:', error);
+          setError('Failed to initialize payment. Please try again.');
+        }
       }
     };
 
@@ -212,7 +240,7 @@ function CheckoutFormContent({ email: initialEmail, name, planId, planName, plan
         <div className={styles.planDetails}>
           <h3>{planData.planName}</h3>
           <p className={styles.price}>
-            ${planData.planPrice} <span>/{planData.period}</span>
+            ${planData.planPrice.toFixed(2)} <span>/{planData.period}</span>
           </p>
           <div className={styles.features}>
             <h4>Whats Included:</h4>
@@ -256,7 +284,7 @@ function CheckoutFormContent({ email: initialEmail, name, planId, planName, plan
               disabled={loading || !stripe}
               width="100%"
             >
-              {loading ? "Processing..." : `Pay $${planData.planPrice}`}
+              {loading ? "Processing..." : `Pay $${planData.planPrice.toFixed(2)}`}
             </Button>
           </form>
         )
