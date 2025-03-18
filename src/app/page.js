@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
   const testimonials = [
@@ -274,28 +275,36 @@ export default function Home() {
 
             <div className={styles.downloadOptions}>
               <div className={styles.storeButtons}>
-                <Image
-                  src="/assets/images/google.png"
-                  alt="Get it on Google Play"
-                  width={180}
-                  height={53}
+                <Link 
+                  href="https://play.google.com/store/apps/details?id=com.nexusbondapp&pcampaignid=web_share"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={styles.storeButton}
-                />
-                <Image
-                  src="/assets/images/apple.png"
-                  alt="Download on App Store"
-                  width={180}
-                  height={53}
+                >
+                  <Image
+                    src="/assets/images/google.png"
+                    alt="Get it on Google Play"
+                    width={180}
+                    height={53}
+                    className={styles.storeButton}
+                  />
+                </Link>
+                <Link 
+                  href="https://apps.apple.com/us/app/nexusbondapp/id6741106962"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={styles.storeButton}
-                />
+                >
+                  <Image
+                    src="/assets/images/apple.png"
+                    alt="Download on App Store"
+                    width={180}
+                    height={53}
+                    className={styles.storeButton}
+                  />
+                </Link>
               </div>
-              <Image
-                src="/assets/images/qr.png"
-                alt="QR Code"
-                width={100}
-                height={100}
-                className={styles.qrCode}
-              />
+             
             </div>
           </div>
 

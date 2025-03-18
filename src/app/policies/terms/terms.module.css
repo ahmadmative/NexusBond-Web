@@ -75,6 +75,35 @@
   margin-bottom: 1rem;
 }
 
+.appStoreLinks {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eaeaea;
+  text-align: center;
+}
+
+.appStoreLinks h3 {
+  color: #1F2937;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.storeButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.storeButton {
+  transition: transform 0.2s ease;
+}
+
+.storeButton:hover {
+  transform: scale(1.05);
+}
+
 @media (max-width: 768px) {
   .policyContent {
     padding: 1.5rem;
@@ -94,5 +123,14 @@
 
   .section h4 {
     font-size: 1.1rem;
+  }
+
+  .storeButtons {
+    gap: 1rem;
+  }
+  
+  .storeButton img {
+    width: 160px;
+    height: auto;
   }
 } 

@@ -1,5 +1,7 @@
 "use client";
 import styles from "./terms.module.css";
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function TermsOfService() {
     return (
@@ -268,7 +270,7 @@ export default function TermsOfService() {
                 <section className={styles.section}>
                     <h3>15. Changes to Terms and Policies Documents</h3>
                     <p>
-                        We reserve the right to update or make changes to these TOS and/or any other Terms and Policies documents from time to time in our sole discretion, and we may notify you of changes by making the revised version of these documents accessible through NexusBond.AI. Such changes will become effective immediately. Please return to these documents periodically to ensure familiarity with the latest version, so that you can determine when these documents were last revised by referring to the “Date of Revision” at the top of this page. If you do not agree with the revised Terms and Policies, you have the right and should immediately stop using NexusBond.AI. Your continued access or use of NexusBond.AI after any changes to these documents have been posted means your agreement and consent to such changes.
+                        We reserve the right to update or make changes to these TOS and/or any other Terms and Policies documents from time to time in our sole discretion, and we may notify you of changes by making the revised version of these documents accessible through NexusBond.AI. Such changes will become effective immediately. Please return to these documents periodically to ensure familiarity with the latest version, so that you can determine when these documents were last revised by referring to the "Date of Revision" at the top of this page. If you do not agree with the revised Terms and Policies, you have the right and should immediately stop using NexusBond.AI. Your continued access or use of NexusBond.AI after any changes to these documents have been posted means your agreement and consent to such changes.
                     </p>
                     <p>
                         We reserve the right to change the Services scope and change the fees applicable to the Services at any time for any reason in our sole discretion and without notice. We are entitled to stop or restrict the provision of the Services in full or in part toward a certain user. We retain powers to discontinue provision and/or support of the Services without any prior notice.
@@ -323,7 +325,39 @@ export default function TermsOfService() {
                     </p>
                 </section>
 
-
+                <section className={styles.appStoreLinks}>
+                    <h3>Download Our App</h3>
+                    <div className={styles.storeButtons}>
+                        <Link 
+                            href="https://apps.apple.com/us/app/nexusbondapp/id6741106962"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.storeButton}
+                        >
+                            <Image
+                                src="/assets/images/apple.png"
+                                alt="Download on App Store"
+                                width={180}
+                                height={53}
+                                className={styles.storeButton}
+                            />
+                        </Link>
+                        <Link 
+                            href="https://play.google.com/store/apps/details?id=com.nexusbondapp&pcampaignid=web_share"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.storeButton}
+                        >
+                            <Image
+                                src="/assets/images/google.png"
+                                alt="Get it on Google Play"
+                                width={180}
+                                height={53}
+                                className={styles.storeButton}
+                            />
+                        </Link>
+                    </div>
+                </section>
             </div>
         </div>
     );
