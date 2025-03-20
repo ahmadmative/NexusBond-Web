@@ -18,6 +18,10 @@ export const metadata = {
         sizes: "any",
       },
       {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+      {
         url: "/assets/images/logo.png",
         type: "image/png",
         sizes: "32x32",
@@ -29,7 +33,13 @@ export const metadata = {
       },
     ],
     shortcut: "/assets/images/logo.png",
-    apple: "/apple-icon.png",
+    apple: [
+      {
+        url: "/assets/images/logo.png",
+        type: "image/png",
+        sizes: "180x180",
+      }
+    ],
   },
 };
 

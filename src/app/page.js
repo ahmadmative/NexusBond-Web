@@ -62,6 +62,13 @@ export default function Home() {
     setActiveFaq(activeFaq === index ? null : index);
   };
 
+  const scrollToMobileApp = () => {
+    const mobileAppSection = document.getElementById('mobileAppSection');
+    if (mobileAppSection) {
+      mobileAppSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.logoContainer}>
@@ -87,7 +94,7 @@ export default function Home() {
           comfort whenever you need it
         </p>
 
-        <button className={styles.downloadButton}>
+        <button className={styles.downloadButton} onClick={scrollToMobileApp}>
           Download App
         </button>
 
@@ -237,13 +244,13 @@ export default function Home() {
             <br />
             understands and complements you.
           </p>
-          <button className={styles.getStartedButton}>
+          <button className={styles.getStartedButton} onClick={scrollToMobileApp}>
             Get Started
           </button>
         </div>
       </section>
 
-      <section className={styles.mobileApp}>
+      <section className={styles.mobileApp} id="mobileAppSection">
         <div className={styles.mobileAppHeader}>
           <h2 className={styles.mobileAppTitle}>Our Mobile App</h2>
           <p className={styles.mobileAppSubtitle}>
@@ -304,7 +311,6 @@ export default function Home() {
                   />
                 </Link>
               </div>
-             
             </div>
           </div>
 
